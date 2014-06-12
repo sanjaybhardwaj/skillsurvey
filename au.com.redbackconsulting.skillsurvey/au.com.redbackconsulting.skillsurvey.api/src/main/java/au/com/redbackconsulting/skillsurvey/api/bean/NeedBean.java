@@ -1,11 +1,16 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class NeedBean {
 	
+	@Expose
 	private Long id;
 	
+	@Expose
 	private String name;
 	
+	@Expose
 	private String description;
 
 	public Long getId() {

@@ -1,9 +1,15 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class DapsscoSkillsBean {
 	
+	
+	@Expose
 	private Long dapssco_Id;
 	
+	
+	@Expose
 	private Long uoc_GroupId;
 
 	public Long getDapssco_Id() {

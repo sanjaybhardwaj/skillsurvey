@@ -1,9 +1,13 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class FunctionOccupationBean {
 	
+	@Expose
 	private Long functionId;
 	
+	@Expose
 	private Long occupationid;
 
 	public Long getFunctionId() {

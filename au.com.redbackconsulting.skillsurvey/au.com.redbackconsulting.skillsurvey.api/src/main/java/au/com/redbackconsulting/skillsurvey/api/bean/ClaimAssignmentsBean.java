@@ -1,9 +1,15 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class ClaimAssignmentsBean {
 	
+	
+	@Expose
 	private Long claimId;
 	
+	
+	@Expose
 	private Long roleId;
 
 	public Long getClaimId() {

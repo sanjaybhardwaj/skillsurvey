@@ -2,16 +2,17 @@ package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class SurveyBean {
 
+	@Expose
 	private Long id;
-	
+	@Expose
 	private Long individualId;
-	
+	@Expose
 	private Long dapssco_Id;
-	
+	@Expose
 	private String startedAt;
-	
+	@Expose
 	private String completedAt;
-	
+	@Expose
 	private Long pathwayId;
 
 	public Long getId() {

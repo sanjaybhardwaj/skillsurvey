@@ -1,13 +1,13 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class UocGroupBean {
-	
+	@Expose
 	private Long id;
-	
+	@Expose
 	private String notes;
-	
+	@Expose
 	private Long needId;
-	
+	@Expose
 	private Long pathwayId;
 
 	public Long getId() {

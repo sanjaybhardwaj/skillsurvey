@@ -1,11 +1,17 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class DapsscoBean {
 	
+	
+	@Expose
 	private Long id;
 	
+	@Expose
 	private Long occupatioId;
 	
+	@Expose
 	private Long levelId;
 
 	public Long getId() {

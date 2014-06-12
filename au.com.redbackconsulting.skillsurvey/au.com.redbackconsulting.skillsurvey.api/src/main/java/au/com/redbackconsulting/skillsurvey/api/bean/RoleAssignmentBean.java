@@ -1,9 +1,9 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class RoleAssignmentBean {
-	
+	@Expose
 	private Long individualId;
-	
+	@Expose
 	private Long roleId;
 
 	public Long getIndividualId() {

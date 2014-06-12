@@ -1,11 +1,11 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class QuestionBean {
-	
+	@Expose
 	private Long id;
-	
+	@Expose
 	private String text;
-	
+	@Expose
 	private String style;
 
 	public Long getId() {

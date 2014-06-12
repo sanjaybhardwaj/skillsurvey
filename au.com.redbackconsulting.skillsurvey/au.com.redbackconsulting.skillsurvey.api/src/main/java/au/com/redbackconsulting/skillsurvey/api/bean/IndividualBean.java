@@ -1,21 +1,31 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class IndividualBean {
 
+	@Expose
 	private Long id;
 
+	@Expose
 	private String name;
 
+	@Expose
 	private String gender;
 
+	@Expose
 	private String loginPassword;
 
+	@Expose
 	private Long departmentId;
 
+	@Expose
 	private Long functionId;
 
+	@Expose
 	private Long occupationId;
 
+	@Expose
 	private Long levelId;
 
 	public Long getId() {

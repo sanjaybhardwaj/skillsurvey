@@ -1,9 +1,9 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class UocGroupMemberBean {
-	
+	@Expose
 	private Long uoc_GroupId;
-	
+	@Expose
 	private Long uoc_Id;
 
 	public Long getUoc_GroupId() {

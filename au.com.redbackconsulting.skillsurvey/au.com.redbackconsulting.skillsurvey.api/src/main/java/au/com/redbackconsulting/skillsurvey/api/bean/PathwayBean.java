@@ -1,11 +1,11 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class PathwayBean {
-	
+	@Expose
 	private Long id;
-	
+	@Expose
 	private String name;
-	
+	@Expose
 	private String description;
 
 	public Long getId() {

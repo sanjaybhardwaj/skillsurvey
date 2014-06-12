@@ -1,11 +1,11 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
 public class SupervisonsBean {
-	
+	@Expose
 	private Long supervisorId;
-	
+	@Expose
 	private Long supervisedId;
-
+  
 	public Long getSupervisorId() {
 		return supervisorId;
 	}
