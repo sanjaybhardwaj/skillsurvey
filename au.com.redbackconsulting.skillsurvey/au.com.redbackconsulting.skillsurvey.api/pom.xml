@@ -5,8 +5,9 @@
     <artifactId>au.com.redbackconsulting.skillsurvey</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+  <groupId>au.com.redbackconsulting.skillsurvey.api</groupId>
   <artifactId>au.com.redbackconsulting.skillsurvey.api</artifactId>
   <packaging>war</packaging>
-  <name>SkillAPI</name>
-  <description>SkillAPI</description>
+  <name>api</name>
+  <description>api</description>
 </project>
