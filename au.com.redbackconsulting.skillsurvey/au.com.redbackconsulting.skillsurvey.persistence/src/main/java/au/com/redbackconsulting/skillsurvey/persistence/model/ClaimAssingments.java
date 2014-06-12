@@ -15,12 +15,17 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "CLAIMASSINGMENT", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIMASSINGMENT, query = "select o from Claimassessment o where o.claimid = :claimid and o.password = :password and o.isActive = :isActive")})
+@Table(name = "CLAIMASSINGMENT", uniqueConstraints = { @UniqueConstraint(columnNames = { "CLAIMID" }) })
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_CLAIMASSINGMENT, query = "select u from ClaimAssingments u where u.Claimid= :Claimid")})
 
 public class ClaimAssingments implements Serializable,IDBEntity {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "CLAIMID")
 	private long  Claimid;
@@ -45,7 +50,6 @@ public class ClaimAssingments implements Serializable,IDBEntity {
 		RoleId = roleId;
 	}
 
-	@Override
 	public Long getId() {
 		// TODO Auto-generated method stub
 		return null;

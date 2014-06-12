@@ -15,9 +15,14 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "ROLE", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_ROLE, query = "select o from Role o where o.id = :id")})
 public class Role  implements Serializable,IDBEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="ID")
 	private Long id;

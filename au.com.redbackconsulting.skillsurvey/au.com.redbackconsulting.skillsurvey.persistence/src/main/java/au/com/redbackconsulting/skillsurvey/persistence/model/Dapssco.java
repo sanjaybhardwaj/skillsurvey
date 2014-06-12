@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "DAPSSCO", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_DAPSSCO, query = "select o from Dapssco o where o.id = :id")})
 
 
 public class Dapssco implements Serializable,IDBEntity {

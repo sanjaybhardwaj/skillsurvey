@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import com.google.gson.annotations.Expose;
+
 public class UocBean {
 	@Expose
 	private Long id;

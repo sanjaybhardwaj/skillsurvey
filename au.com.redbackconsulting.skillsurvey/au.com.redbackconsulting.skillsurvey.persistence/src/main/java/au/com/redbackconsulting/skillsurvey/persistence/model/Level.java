@@ -15,8 +15,16 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "LEVEL", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_LEVEL, query = "select o from Level o where o.id = :id ")})
+
+
 public class Level implements Serializable,IDBEntity {
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 @Id
 @Column(name="ID")
@@ -51,7 +59,6 @@ public void setId(Long id) {
 	this.id = id;
 }
 
-@Override
 public Long getId() {
 	// TODO Auto-generated method stub
 	return null;

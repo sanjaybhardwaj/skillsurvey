@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="au.com.redbackconsulting.skillsurvey.persistence">
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Claim</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.ClaimAssingments</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Dapssco</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.DapsscoLevel</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.DapsscoSkills</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Department</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Function</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.FunctionOccupations</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Individual</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Level</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Need</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Occupation</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Pathway</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Question</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Role</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.RoleAssignments</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Supervisons</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Survey</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.SurveyAnswer</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Uoc</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocGroup</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocGroupMembers</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocQuestion</class>
 	</persistence-unit>
 </persistence>

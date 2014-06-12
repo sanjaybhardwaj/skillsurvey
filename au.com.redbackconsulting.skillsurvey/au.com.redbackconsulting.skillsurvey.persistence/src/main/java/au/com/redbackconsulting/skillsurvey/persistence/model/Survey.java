@@ -15,9 +15,16 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "SURVEY", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_SURVEY, query = "select o from Survey o where o.id = :id")})
+
+
 public class Survey implements Serializable,IDBEntity {
 
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 @Id
 @Column(name="ID")

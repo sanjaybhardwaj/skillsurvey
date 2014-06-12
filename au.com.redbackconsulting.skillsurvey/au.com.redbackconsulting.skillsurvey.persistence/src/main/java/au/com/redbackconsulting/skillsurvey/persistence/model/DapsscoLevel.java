@@ -14,12 +14,18 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "DAPSSCOLEVEL", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@Table(name = "DAPSSCOLEVEL", uniqueConstraints = { @UniqueConstraint(columnNames = { "DEPSSCO_ID" }) })
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_DAPSSCOLEVEL, query = "select o from DapsscoLevel o where o.dapssco_id = :dapssco_id")})
 
 
 public class DapsscoLevel implements Serializable,IDBEntity {
 
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 
 	public Long getDapssco_id() {
@@ -52,7 +58,6 @@ private Long dapssco_id;
 private Long levelId;
 
 
-	@Override
 	public Long getId() {
 		// TODO Auto-generated method stub
 		return null;

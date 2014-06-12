@@ -13,12 +13,18 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "FUNCTIONOCCUPTIONS", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@Table(name = "FUNCTIONOCCUPTIONS", uniqueConstraints = { @UniqueConstraint(columnNames = { "FUNCTIONID" }) })
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_FUNCTIONOCCUPTIONS, query = "select o from FunctionOccupations o where o.functionId = :functionId ")})
 
 public class FunctionOccupations implements Serializable,IDBEntity {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
 	@Column(name="FUNCTIONID")
 private Long functionId;
@@ -49,7 +55,6 @@ private Long functionId;
 	}
 
 
-	@Override
 	public Long getId() {
 		// TODO Auto-generated method stub
 		return null;

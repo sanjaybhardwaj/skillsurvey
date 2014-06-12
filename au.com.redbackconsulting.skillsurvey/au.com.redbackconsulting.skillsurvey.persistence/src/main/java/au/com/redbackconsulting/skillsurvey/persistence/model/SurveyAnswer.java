@@ -14,11 +14,16 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "SURVEYANSWER", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.CLAIM, query = "select o from Administrators o where o.emailAddress = :emailAddress and o.password = :password and o.isActive = :isActive")})
+@Table(name = "SURVEYANSWER", uniqueConstraints = { @UniqueConstraint(columnNames = { "UOC_QUESTIONID" }) })
+@NamedQueries({ @NamedQuery(name = DBQueries.GET_SURVEYANSWER, query = "select o from SurveyAnswer o where o.uoc_QuestionId = :uoc_QuestionId")})
 
 public class SurveyAnswer implements Serializable,IDBEntity {
 
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 @Id
 @Column(name="UOC_QUESTIONID")
@@ -68,7 +73,6 @@ public void setAnsweredAt(String answeredAt) {
 	this.answeredAt = answeredAt;
 }
 
-@Override
 public Long getId() {
 	// TODO Auto-generated method stub
 	return null;
