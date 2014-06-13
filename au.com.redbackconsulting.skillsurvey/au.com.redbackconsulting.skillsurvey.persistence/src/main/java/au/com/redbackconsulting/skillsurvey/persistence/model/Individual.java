@@ -1,126 +1,209 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 
-
-
+/**
+ * The persistent class for the individual database table.
+ * 
+ */
 @Entity
-@Table(name = "INDIVIDUAL", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_INDIVIDUAL, query = "select o from Individual o where o.id = :id ")})
-
-public class Individual implements Serializable,IDBEntity {
-
-	
-	/**
-	 * 
-	 */
+@NamedQuery(name="Individual.findAll", query="SELECT i FROM Individual i")
+public class Individual implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID")
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idindividual;
 
-	@Basic
-	@Column(name="NAME")
-	private String name;
-
-	@Basic
-	@Column(name="GENDER")
 	private String gender;
 
-	@Basic
-	@Column(name="LOGINPASSWORD")
-	private String loginPassword;
+	private String login;
 
-	@Basic
-	@Column(name="DEPARTMENTID")
-	private Long departmentId;
+	private String name;
 
-	@Basic
-	@Column(name="FUNCTIONID")
-	private Long functionId;
+	private String password;
 
-	@Basic
-	@Column(name="OCCUPTIONID")
-	private Long occupationId;
+	//bi-directional many-to-one association to Department
+	@ManyToOne
+	@JoinColumn(name="department_id")
+	private Department department;
 
-	public String getName() {
-		return name;
+	//bi-directional many-to-one association to Function
+	@ManyToOne
+	@JoinColumn(name="function_id")
+	private Function function;
+
+	//bi-directional many-to-many association to Individual
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="supervisons"
+		, joinColumns={
+			@JoinColumn(name="supervised_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="supervisor_id")
+			}
+		)
+	private List<Individual> individuals1;
+
+	//bi-directional many-to-many association to Individual
+	@ManyToMany(mappedBy="individuals1", fetch=FetchType.EAGER)
+	private List<Individual> individuals2;
+
+	//bi-directional many-to-one association to Level
+	@ManyToOne
+	@JoinColumn(name="level_id")
+	private Level level;
+
+	//bi-directional many-to-one association to Occupation
+	@ManyToOne
+	@JoinColumn(name="occuption_id")
+	private Occupation occupation;
+
+	//bi-directional many-to-one association to RoleAssignment
+	@OneToMany(mappedBy="individual", fetch=FetchType.EAGER)
+	private List<RoleAssignment> roleAssignments;
+
+	//bi-directional many-to-one association to Survey
+	@OneToMany(mappedBy="individual", fetch=FetchType.EAGER)
+	private List<Survey> surveys;
+
+	public Individual() {
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public int getIdindividual() {
+		return this.idindividual;
+	}
+
+	public void setIdindividual(int idindividual) {
+		this.idindividual = idindividual;
 	}
 
 	public String getGender() {
-		return gender;
+		return this.gender;
 	}
 
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public String getLoginPassword() {
-		return loginPassword;
+	public String getLogin() {
+		return this.login;
 	}
 
-	public void setLoginPassword(String loginPassword) {
-		this.loginPassword = loginPassword;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public Long getDepartmentId() {
-		return departmentId;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setDepartmentId(Long departmentId) {
-		this.departmentId = departmentId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Long getFunctionId() {
-		return functionId;
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setFunctionId(Long functionId) {
-		this.functionId = functionId;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public Long getOccupationId() {
-		return occupationId;
+	public Department getDepartment() {
+		return this.department;
 	}
 
-	public void setOccupationId(Long occupationId) {
-		this.occupationId = occupationId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
-	public Long getLevelId() {
-		return levelId;
+	public Function getFunction() {
+		return this.function;
 	}
 
-	public void setLevelId(Long levelId) {
-		this.levelId = levelId;
+	public void setFunction(Function function) {
+		this.function = function;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public List<Individual> getIndividuals1() {
+		return this.individuals1;
 	}
 
-	@Basic
-	@Column(name="LEVELID")
-	private Long levelId;
+	public void setIndividuals1(List<Individual> individuals1) {
+		this.individuals1 = individuals1;
+	}
 
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Individual> getIndividuals2() {
+		return this.individuals2;
+	}
+
+	public void setIndividuals2(List<Individual> individuals2) {
+		this.individuals2 = individuals2;
+	}
+
+	public Level getLevel() {
+		return this.level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
+	public Occupation getOccupation() {
+		return this.occupation;
+	}
+
+	public void setOccupation(Occupation occupation) {
+		this.occupation = occupation;
+	}
+
+	public List<RoleAssignment> getRoleAssignments() {
+		return this.roleAssignments;
+	}
+
+	public void setRoleAssignments(List<RoleAssignment> roleAssignments) {
+		this.roleAssignments = roleAssignments;
+	}
+
+	public RoleAssignment addRoleAssignment(RoleAssignment roleAssignment) {
+		getRoleAssignments().add(roleAssignment);
+		roleAssignment.setIndividual(this);
+
+		return roleAssignment;
+	}
+
+	public RoleAssignment removeRoleAssignment(RoleAssignment roleAssignment) {
+		getRoleAssignments().remove(roleAssignment);
+		roleAssignment.setIndividual(null);
+
+		return roleAssignment;
+	}
+
+	public List<Survey> getSurveys() {
+		return this.surveys;
+	}
+
+	public void setSurveys(List<Survey> surveys) {
+		this.surveys = surveys;
+	}
+
+	public Survey addSurvey(Survey survey) {
+		getSurveys().add(survey);
+		survey.setIndividual(this);
+
+		return survey;
+	}
+
+	public Survey removeSurvey(Survey survey) {
+		getSurveys().remove(survey);
+		survey.setIndividual(null);
+
+		return survey;
 	}
 
 }

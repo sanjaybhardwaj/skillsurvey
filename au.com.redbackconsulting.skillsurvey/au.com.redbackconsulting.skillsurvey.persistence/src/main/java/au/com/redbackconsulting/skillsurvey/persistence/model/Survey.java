@@ -1,103 +1,122 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-
-
-@Entity
-@Table(name = "SURVEY", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_SURVEY, query = "select o from Survey o where o.id = :id")})
-
-
-public class Survey implements Serializable,IDBEntity {
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 
 /**
-	 * 
-	 */
+ * The persistent class for the survey database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Survey.findAll", query="SELECT s FROM Survey s")
+public class Survey implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-@Id
-@Column(name="ID")
-private Long id;
-	
-@Basic
-@Column(name="INDIVIDUALID")
-private Long individualId;
-	
-@Basic
-@Column(name="DAPSSCO_ID")
-	private Long dapssco_Id;
-	
-@Basic
-@Column(name="STARTEDAT")
-	private String startedAt;
-	
-@Basic
-@Column(name="COMPLETEDAT")
-	private String completedAt;
-	
-@Basic
-@Column(name="PATHWAYID")
-	private Long pathwayId;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idsurvey;
 
-public Long getId() {
-	return id;
-}
+	@Temporal(TemporalType.DATE)
+	@Column(name="completed_at")
+	private Date completedAt;
 
-public void setId(Long id) {
-	this.id = id;
-}
+	@Temporal(TemporalType.DATE)
+	@Column(name="started_at")
+	private Date startedAt;
 
-public Long getIndividualId() {
-	return individualId;
-}
+	//bi-directional many-to-one association to SurveryAnswer
+	@OneToMany(mappedBy="survey", fetch=FetchType.EAGER)
+	private List<SurveryAnswer> surveryAnswers;
 
-public void setIndividualId(Long individualId) {
-	this.individualId = individualId;
-}
+	//bi-directional many-to-one association to Dapssco
+	@ManyToOne
+	@JoinColumn(name="dapsscoid")
+	private Dapssco dapssco;
 
-public Long getDapssco_Id() {
-	return dapssco_Id;
-}
+	//bi-directional many-to-one association to Individual
+	@ManyToOne
+	@JoinColumn(name="individualid")
+	private Individual individual;
 
-public void setDapssco_Id(Long dapssco_Id) {
-	this.dapssco_Id = dapssco_Id;
-}
+	//bi-directional many-to-one association to Pathway
+	@ManyToOne
+	@JoinColumn(name="pathwayid")
+	private Pathway pathway;
 
-public String getStartedAt() {
-	return startedAt;
-}
+	public Survey() {
+	}
 
-public void setStartedAt(String startedAt) {
-	this.startedAt = startedAt;
-}
+	public int getIdsurvey() {
+		return this.idsurvey;
+	}
 
-public String getCompletedAt() {
-	return completedAt;
-}
+	public void setIdsurvey(int idsurvey) {
+		this.idsurvey = idsurvey;
+	}
 
-public void setCompletedAt(String completedAt) {
-	this.completedAt = completedAt;
-}
+	public Date getCompletedAt() {
+		return this.completedAt;
+	}
 
-public Long getPathwayId() {
-	return pathwayId;
-}
+	public void setCompletedAt(Date completedAt) {
+		this.completedAt = completedAt;
+	}
 
-public void setPathwayId(Long pathwayId) {
-	this.pathwayId = pathwayId;
-}
+	public Date getStartedAt() {
+		return this.startedAt;
+	}
 
+	public void setStartedAt(Date startedAt) {
+		this.startedAt = startedAt;
+	}
 
+	public List<SurveryAnswer> getSurveryAnswers() {
+		return this.surveryAnswers;
+	}
+
+	public void setSurveryAnswers(List<SurveryAnswer> surveryAnswers) {
+		this.surveryAnswers = surveryAnswers;
+	}
+
+	public SurveryAnswer addSurveryAnswer(SurveryAnswer surveryAnswer) {
+		getSurveryAnswers().add(surveryAnswer);
+		surveryAnswer.setSurvey(this);
+
+		return surveryAnswer;
+	}
+
+	public SurveryAnswer removeSurveryAnswer(SurveryAnswer surveryAnswer) {
+		getSurveryAnswers().remove(surveryAnswer);
+		surveryAnswer.setSurvey(null);
+
+		return surveryAnswer;
+	}
+
+	public Dapssco getDapssco() {
+		return this.dapssco;
+	}
+
+	public void setDapssco(Dapssco dapssco) {
+		this.dapssco = dapssco;
+	}
+
+	public Individual getIndividual() {
+		return this.individual;
+	}
+
+	public void setIndividual(Individual individual) {
+		this.individual = individual;
+	}
+
+	public Pathway getPathway() {
+		return this.pathway;
+	}
+
+	public void setPathway(Pathway pathway) {
+		this.pathway = pathway;
+	}
 
 }

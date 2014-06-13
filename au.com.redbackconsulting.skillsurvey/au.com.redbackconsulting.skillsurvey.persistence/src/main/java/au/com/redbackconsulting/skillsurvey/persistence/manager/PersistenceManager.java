@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import au.com.redbackconsulting.skillsurvey.persistence.manager.EntityManagerProvider;
+import au.com.redbackconsulting.skillsurvey.persistence.manager.PersistenceManager;
 import au.com.redbackconsulting.skillsurvey.persistence.manager.Impl.DataSourceProvider;
 import au.com.redbackconsulting.skillsurvey.persistence.manager.Impl.EntityManagerFactoryProvider;
 import au.com.redbackconsulting.skillsurvey.persistence.manager.Impl.EntityManagerProviderImpl;

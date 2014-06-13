@@ -1,19 +1,17 @@
 
 package au.com.redbackconsulting.skillsurvey.service;
 
-import java.io.IOException;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import au.com.redbackconsulting.scheduler.persistence.manager.*;
+import au.com.redbackconsulting.skillsurvey.persistence.manager.PersistenceManager;
 
 public class AppServletContextListener implements ServletContextListener {
 
-    private static Logger logger = LoggerFactory.getLogger(AppServletContextListener.class);
+	private static Logger logger = LoggerFactory.getLogger(AppServletContextListener.class);
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
@@ -28,19 +26,4 @@ public class AppServletContextListener implements ServletContextListener {
             PersistenceManager.getInstance().closeAll();
         }
     }
-
-    /*
-    private void initBenefits() {
-        final BenefitDAO benefitDAO = new BenefitDAO();
-        if (benefitDAO.getAll().size() == 0) {
-            final BenefitsDataImporter benefitImporter = new BenefitsDataImporter();
-            try {
-                benefitImporter.importData("/benefits.csv");
-            } catch (IOException e) {
-                logger.error("Could not insert beneits data into DB", e);
-            }
-        }
-
-    }
-*/
 }

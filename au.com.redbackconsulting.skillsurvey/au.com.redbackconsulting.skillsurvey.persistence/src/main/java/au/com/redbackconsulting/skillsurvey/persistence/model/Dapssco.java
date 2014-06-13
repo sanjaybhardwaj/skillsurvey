@@ -1,66 +1,115 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 
+/**
+ * The persistent class for the dapssco database table.
+ * 
+ */
 @Entity
-@Table(name = "DAPSSCO", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_DAPSSCO, query = "select o from Dapssco o where o.id = :id")})
-
-
-public class Dapssco implements Serializable,IDBEntity {
-
-	private static final long serialVersionUID = -8129499475178666334L;
+@NamedQuery(name="Dapssco.findAll", query="SELECT d FROM Dapssco d")
+public class Dapssco implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID")
-	private Long id;
-	
-	
-	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int iddepssco;
 
-	@Basic
-	@Column(name = "OCCUPTIONID")
-	private Long occupatioId;
-	
-	@Basic
-	@Column(name = "LEVELID")
-	private Long levelId;
+	@Column(name="level_id")
+	private int levelId;
 
-	public Long getId() {
-		return id;
+	//bi-directional many-to-one association to Occupation
+	@ManyToOne
+	@JoinColumn(name="occup_id")
+	private Occupation occupation;
+
+	//bi-directional many-to-many association to UocGroup
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="dapssco_skills"
+		, joinColumns={
+			@JoinColumn(name="dapssco_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="uoc_group_id")
+			}
+		)
+	private List<UocGroup> uocGroups;
+
+	//bi-directional many-to-many association to Level
+	@ManyToMany(mappedBy="dapsscos", fetch=FetchType.EAGER)
+	private List<Level> levels;
+
+	//bi-directional many-to-one association to Survey
+	@OneToMany(mappedBy="dapssco", fetch=FetchType.EAGER)
+	private List<Survey> surveys;
+
+	public Dapssco() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getIddepssco() {
+		return this.iddepssco;
 	}
 
-	public Long getOccupatioId() {
-		return occupatioId;
+	public void setIddepssco(int iddepssco) {
+		this.iddepssco = iddepssco;
 	}
 
-	public void setOccupatioId(Long occupatioId) {
-		this.occupatioId = occupatioId;
+	public int getLevelId() {
+		return this.levelId;
 	}
 
-	public Long getLevelId() {
-		return levelId;
-	}
-
-	public void setLevelId(Long levelId) {
+	public void setLevelId(int levelId) {
 		this.levelId = levelId;
 	}
 
+	public Occupation getOccupation() {
+		return this.occupation;
+	}
 
+	public void setOccupation(Occupation occupation) {
+		this.occupation = occupation;
+	}
 
+	public List<UocGroup> getUocGroups() {
+		return this.uocGroups;
+	}
+
+	public void setUocGroups(List<UocGroup> uocGroups) {
+		this.uocGroups = uocGroups;
+	}
+
+	public List<Level> getLevels() {
+		return this.levels;
+	}
+
+	public void setLevels(List<Level> levels) {
+		this.levels = levels;
+	}
+
+	public List<Survey> getSurveys() {
+		return this.surveys;
+	}
+
+	public void setSurveys(List<Survey> surveys) {
+		this.surveys = surveys;
+	}
+
+	public Survey addSurvey(Survey survey) {
+		getSurveys().add(survey);
+		survey.setDapssco(this);
+
+		return survey;
+	}
+
+	public Survey removeSurvey(Survey survey) {
+		getSurveys().remove(survey);
+		survey.setDapssco(null);
+
+		return survey;
+	}
 
 }

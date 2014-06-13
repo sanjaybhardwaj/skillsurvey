@@ -1,87 +1,93 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-
-
-@Entity
-@Table(name = "UOCGROUP", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_UOCGROUP, query = "select o from UocGroup o where o.id = :id")})
-
-public class UocGroup implements Serializable,IDBEntity {
+import javax.persistence.*;
+import java.util.List;
 
 
 /**
-	 * 
-	 */
+ * The persistent class for the uoc_group database table.
+ * 
+ */
+@Entity
+@Table(name="uoc_group")
+@NamedQuery(name="UocGroup.findAll", query="SELECT u FROM UocGroup u")
+public class UocGroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-@Id
-@Column(name="ID")
-	private Long id;
-	
-@Basic
-@Column(name="NOTES")
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int iduocgroup;
+
 	private String notes;
-	
 
-@Basic
-@Column(name="NEEDID")
-	private Long needId;
-	
+	//bi-directional many-to-many association to Dapssco
+	@ManyToMany(mappedBy="uocGroups", fetch=FetchType.EAGER)
+	private List<Dapssco> dapsscos;
 
-@Basic
-@Column(name="PATHWAYID")
-	private Long pathwayId;
+	//bi-directional many-to-many association to Uoc
+	@ManyToMany(mappedBy="uocGroups", fetch=FetchType.EAGER)
+	private List<Uoc> uocs;
 
+	//bi-directional many-to-one association to Need
+	@ManyToOne
+	@JoinColumn(name="need_id")
+	private Need need;
 
-public Long getId() {
-	return id;
-}
+	//bi-directional many-to-one association to Pathway
+	@ManyToOne
+	@JoinColumn(name="pathway_id")
+	private Pathway pathway;
 
+	public UocGroup() {
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public int getIduocgroup() {
+		return this.iduocgroup;
+	}
 
+	public void setIduocgroup(int iduocgroup) {
+		this.iduocgroup = iduocgroup;
+	}
 
-public String getNotes() {
-	return notes;
-}
+	public String getNotes() {
+		return this.notes;
+	}
 
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
 
-public void setNotes(String notes) {
-	this.notes = notes;
-}
+	public List<Dapssco> getDapsscos() {
+		return this.dapsscos;
+	}
 
+	public void setDapsscos(List<Dapssco> dapsscos) {
+		this.dapsscos = dapsscos;
+	}
 
-public Long getNeedId() {
-	return needId;
-}
+	public List<Uoc> getUocs() {
+		return this.uocs;
+	}
 
+	public void setUocs(List<Uoc> uocs) {
+		this.uocs = uocs;
+	}
 
-public void setNeedId(Long needId) {
-	this.needId = needId;
-}
+	public Need getNeed() {
+		return this.need;
+	}
 
+	public void setNeed(Need need) {
+		this.need = need;
+	}
 
-public Long getPathwayId() {
-	return pathwayId;
-}
+	public Pathway getPathway() {
+		return this.pathway;
+	}
 
-
-public void setPathwayId(Long pathwayId) {
-	this.pathwayId = pathwayId;
-}
-
+	public void setPathway(Pathway pathway) {
+		this.pathway = pathway;
+	}
 
 }

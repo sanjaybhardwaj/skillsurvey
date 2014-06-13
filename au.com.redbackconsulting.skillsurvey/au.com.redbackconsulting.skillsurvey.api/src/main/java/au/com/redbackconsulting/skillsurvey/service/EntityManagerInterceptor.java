@@ -9,7 +9,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import au.com.redbackconsulting.scheduler.persistence.manager.*;
+
+import au.com.redbackconsulting.skillsurvey.persistence.manager.PersistenceManager;
 
 public class EntityManagerInterceptor implements Filter {
 

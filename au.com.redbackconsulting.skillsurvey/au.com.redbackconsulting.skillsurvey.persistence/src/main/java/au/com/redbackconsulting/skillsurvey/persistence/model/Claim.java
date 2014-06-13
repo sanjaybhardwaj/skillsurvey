@@ -1,53 +1,54 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 
-
-
+/**
+ * The persistent class for the claim database table.
+ * 
+ */
 @Entity
-@Table(name = "CLAIM", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_CLAIM, query = "select u from Claim u where u.id = :id")})
-
-
-
-public class Claim implements Serializable, IDBEntity {
-
-
-	private static final long serialVersionUID = -8129499475178666334L;
+@NamedQuery(name="Claim.findAll", query="SELECT c FROM Claim c")
+public class Claim implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID")
-	private long  id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idclaim;
 
-	@Basic
-	@Column(name = "CODE")
-	private String Code;
+	private String code;
 
-	public Long getId() {
-		return id;
+	//bi-directional many-to-many association to Role
+	@ManyToMany(mappedBy="claims", fetch=FetchType.EAGER)
+	private List<Role> roles;
+
+	public Claim() {
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public int getIdclaim() {
+		return this.idclaim;
+	}
+
+	public void setIdclaim(int idclaim) {
+		this.idclaim = idclaim;
 	}
 
 	public String getCode() {
-		return Code;
+		return this.code;
 	}
 
 	public void setCode(String code) {
-		Code = code;
+		this.code = code;
 	}
 
+	public List<Role> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 }

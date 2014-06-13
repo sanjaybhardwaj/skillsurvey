@@ -5,7 +5,6 @@ import java.io.StringReader;
 import java.util.Collections;
 import java.util.List;
 
-import au.com.redbackconsulting.scheduler.api.bean.UserBean;
 import au.com.redbackconsulting.skillsurvey.api.util.GsonFactory;
 
 import com.google.gson.Gson;
@@ -31,12 +30,12 @@ public class CoreODataParser {
         return sfuser;
     }
     
-    public UserBean loadUserBeanProfileFromJsom(String json) throws IOException {
-        JsonReader reader = getJsonReader(json);
-        UserBean ubuser = gson.fromJson(reader, UserBean.class);
-        closeJsonReader(reader);
-        return ubuser;
-    }
+//    public UserBean loadUserBeanProfileFromJsom(String json) throws IOException {
+//        JsonReader reader = getJsonReader(json);
+//        UserBean ubuser = gson.fromJson(reader, UserBean.class);
+//        closeJsonReader(reader);
+//        return ubuser;
+//    }
 
     public List<SFUser> loadSFUserProfileListFromJsom(String json) throws IOException {
         if (json == null) {

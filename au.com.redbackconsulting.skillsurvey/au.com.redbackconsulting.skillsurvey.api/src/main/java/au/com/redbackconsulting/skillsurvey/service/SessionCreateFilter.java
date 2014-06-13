@@ -3,7 +3,6 @@ package au.com.redbackconsulting.skillsurvey.service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,37 +10,30 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
+import au.com.redbackconsulting.skillsurvey.api.BaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sap.security.um.user.PersistenceException;
-import com.sap.security.um.user.UnsupportedUserAttributeException;
-import com.sap.security.um.user.UserProvider;
-
-import au.com.redbackconsulting.scheduler.persistence.*;
-import au.com.redbackconsulting.scheduler.persistence.model.*;
 import au.com.redbackconsulting.skillsurvey.connectivity.CoreODataConnector;
 import au.com.redbackconsulting.skillsurvey.connectivity.helper.SFUser;
+import au.com.redbackconsulting.skillsurvey.persistence.*;
+import au.com.redbackconsulting.skillsurvey.persistence.model.*;
 
 @SuppressWarnings("nls")
 public class SessionCreateFilter implements Filter {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-@Resource
-private UserProvider userprovider;
 	@Override
 	public void destroy() {
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletRequest httpRequest = (HttpServletRequest) request; 
 		String loggedInUser = httpRequest.getRemoteUser();
-
 		if (loggedInUser != null) {
-			initUserSession(loggedInUser, httpRequest);
+			//initUserSession(loggedInUser, httpRequest);
 		}
 
 		filterChain.doFilter(request, response);
@@ -55,7 +47,7 @@ private UserProvider userprovider;
 			if (initialFlag != null) {
 				logger.info("User '{}' session is initialized.", loggedInUser);
 				UserDAO userDAO = getUserDAO();
-				User user = initSingleUserProfile(loggedInUser, userDAO, request);
+				User user = initSingleUserProfile(loggedInUser, userDAO);
 				if (request.isUserInRole("Administrator") && user != null) {
 					initManagedUsers(user, userDAO);
 				}
@@ -92,19 +84,10 @@ private UserProvider userprovider;
 		return new UserDAO();
 	}
 
-	private User initSingleUserProfile(String userName, UserDAO userDAO, HttpServletRequest request) {
-		
-		User user = new  User();
+	private User initSingleUserProfile(String userName, UserDAO userDAO) {
+		User user = userDAO.getOrCreateUser(userName);
+
 		try {
-			com.sap.security.um.user.User umUser = userprovider.getUser(userName);
-			String umFName = umUser.getAttribute("firstname");
-			String umLName = umUser.getAttribute("lastname");
-			String umEmail = umUser.getAttribute("email");
-			user.setFirstName(umFName);
-			user.setLastName(umLName);
-			user.setUserId(userName);
-			user.setEmail(umEmail);
-			user = userDAO.getOrCreateUser(user);
 			SFUser sfUser = CoreODataConnector.getInstance().getUserProfile(userName);
 			sfUser.write(user);
 			if (sfUser.hr != null) {
@@ -121,12 +104,6 @@ private UserProvider userprovider;
 			logger.info("User '{}' updated in database.", userName);
 		} catch (IOException e) {
 			logger.info("User '{}' could not be extracted from backend.", userName, e);
-		} catch (PersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedUserAttributeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return user;
 	}

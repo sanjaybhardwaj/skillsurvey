@@ -1,66 +1,104 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 
+/**
+ * The persistent class for the pathway database table.
+ * 
+ */
 @Entity
-@Table(name = "PATHWAY", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_PATHWAY, query = "select o from Pathway o where o.id = :id")})
-
-public class Pathway implements Serializable,IDBEntity {
-
-	
-
-	
-	/**
-	 * 
-	 */
+@NamedQuery(name="Pathway.findAll", query="SELECT p FROM Pathway p")
+public class Pathway implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID")
-	private Long id;
-	
-	@Basic
-	@Column(name="NAME")
-	private String name;
-	
-	@Basic
-	@Column(name="DESCRIPTION")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idpathway;
+
 	private String description;
 
-	public Long getId() {
-		return id;
+	private String name;
+
+	//bi-directional many-to-one association to Survey
+	@OneToMany(mappedBy="pathway", fetch=FetchType.EAGER)
+	private List<Survey> surveys;
+
+	//bi-directional many-to-one association to UocGroup
+	@OneToMany(mappedBy="pathway", fetch=FetchType.EAGER)
+	private List<UocGroup> uocGroups;
+
+	public Pathway() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getIdpathway() {
+		return this.idpathway;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setIdpathway(int idpathway) {
+		this.idpathway = idpathway;
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Survey> getSurveys() {
+		return this.surveys;
+	}
+
+	public void setSurveys(List<Survey> surveys) {
+		this.surveys = surveys;
+	}
+
+	public Survey addSurvey(Survey survey) {
+		getSurveys().add(survey);
+		survey.setPathway(this);
+
+		return survey;
+	}
+
+	public Survey removeSurvey(Survey survey) {
+		getSurveys().remove(survey);
+		survey.setPathway(null);
+
+		return survey;
+	}
+
+	public List<UocGroup> getUocGroups() {
+		return this.uocGroups;
+	}
+
+	public void setUocGroups(List<UocGroup> uocGroups) {
+		this.uocGroups = uocGroups;
+	}
+
+	public UocGroup addUocGroup(UocGroup uocGroup) {
+		getUocGroups().add(uocGroup);
+		uocGroup.setPathway(this);
+
+		return uocGroup;
+	}
+
+	public UocGroup removeUocGroup(UocGroup uocGroup) {
+		getUocGroups().remove(uocGroup);
+		uocGroup.setPathway(null);
+
+		return uocGroup;
+	}
+
 }

@@ -1,64 +1,73 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 
-
+/**
+ * The persistent class for the role database table.
+ * 
+ */
 @Entity
-@Table(name = "ROLE", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_ROLE, query = "select o from Role o where o.id = :id")})
-public class Role  implements Serializable,IDBEntity {
-	
-	/**
-	 * 
-	 */
+@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID")
-	private Long id;
-	
-	@Basic
-	@Column(name="NAME")
-	private String name;
-	
-	@Basic
-	@Column(name="DESCRIPTION")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idrole;
+
 	private String description;
 
-	public Long getId() {
-		return id;
+	private String name;
+
+	//bi-directional many-to-many association to Claim
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="claima_assignment"
+		, joinColumns={
+			@JoinColumn(name="role_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="claim_id")
+			}
+		)
+	private List<Claim> claims;
+
+	public Role() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getIdrole() {
+		return this.idrole;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setIdrole(int idrole) {
+		this.idrole = idrole;
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Claim> getClaims() {
+		return this.claims;
+	}
+
+	public void setClaims(List<Claim> claims) {
+		this.claims = claims;
+	}
 
 }

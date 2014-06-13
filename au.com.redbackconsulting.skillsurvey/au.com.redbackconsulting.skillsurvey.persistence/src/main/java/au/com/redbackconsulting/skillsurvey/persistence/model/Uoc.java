@@ -1,75 +1,109 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-
-@Entity
-@Table(name = "UOC", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_UOC, query = "select o from Uoc o where o.id = :id")})
-
-public class Uoc implements Serializable,IDBEntity {
 
 /**
-	 * 
-	 */
+ * The persistent class for the uoc database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Uoc.findAll", query="SELECT u FROM Uoc u")
+public class Uoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-@Id
-@Column(name="ID")
-private Long id;
-	
-@Basic
-@Column(name="NAME")
-	private String name;
-	
-@Basic
-@Column(name="DESCRIPTION")
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int iduoc;
+
 	private String description;
-	
-@Basic
-@Column(name="TYPE")
+
+	private String name;
+
 	private String type;
 
-public Long getId() {
-	return id;
-}
+	//bi-directional many-to-many association to UocGroup
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="uoc_group_members"
+		, joinColumns={
+			@JoinColumn(name="uoc_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="uoc_group_id")
+			}
+		)
+	private List<UocGroup> uocGroups;
 
-public void setId(Long id) {
-	this.id = id;
-}
+	//bi-directional many-to-one association to UocQuestion
+	@OneToMany(mappedBy="uoc", fetch=FetchType.EAGER)
+	private List<UocQuestion> uocQuestions;
 
-public String getName() {
-	return name;
-}
+	public Uoc() {
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public int getIduoc() {
+		return this.iduoc;
+	}
 
-public String getDescription() {
-	return description;
-}
+	public void setIduoc(int iduoc) {
+		this.iduoc = iduoc;
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
+	public String getDescription() {
+		return this.description;
+	}
 
-public String getType() {
-	return type;
-}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-public void setType(String type) {
-	this.type = type;
-}
-	
-	
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public List<UocGroup> getUocGroups() {
+		return this.uocGroups;
+	}
+
+	public void setUocGroups(List<UocGroup> uocGroups) {
+		this.uocGroups = uocGroups;
+	}
+
+	public List<UocQuestion> getUocQuestions() {
+		return this.uocQuestions;
+	}
+
+	public void setUocQuestions(List<UocQuestion> uocQuestions) {
+		this.uocQuestions = uocQuestions;
+	}
+
+	public UocQuestion addUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().add(uocQuestion);
+		uocQuestion.setUoc(this);
+
+		return uocQuestion;
+	}
+
+	public UocQuestion removeUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().remove(uocQuestion);
+		uocQuestion.setUoc(null);
+
+		return uocQuestion;
+	}
+
 }

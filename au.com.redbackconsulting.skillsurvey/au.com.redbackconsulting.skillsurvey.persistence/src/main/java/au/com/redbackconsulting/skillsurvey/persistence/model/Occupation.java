@@ -1,59 +1,125 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 
+/**
+ * The persistent class for the occupation database table.
+ * 
+ */
 @Entity
-@Table(name = "OCCUPATION", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_OCCUPATION, query = "select o from Occupation o where o.id = :id")})
+@NamedQuery(name="Occupation.findAll", query="SELECT o FROM Occupation o")
+public class Occupation implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-public class Occupation implements Serializable,IDBEntity {
-
-	
 	@Id
-	@Column(name="ID")
-	private Long id;
-	
-	@Basic
-	@Column(name="NAME")
-	private String name;
-	
-	@Basic
-	@Column(name="DESCRIPTION")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idoccupation;
+
 	private String description;
 
-	public Long getId() {
-		return id;
+	private String name;
+
+	//bi-directional many-to-one association to Dapssco
+	@OneToMany(mappedBy="occupation", fetch=FetchType.EAGER)
+	private List<Dapssco> dapsscos;
+
+	//bi-directional many-to-one association to Individual
+	@OneToMany(mappedBy="occupation", fetch=FetchType.EAGER)
+	private List<Individual> individuals;
+
+	//bi-directional many-to-many association to Function
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="function_occupations"
+		, joinColumns={
+			@JoinColumn(name="occupation_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="function_id")
+			}
+		)
+	private List<Function> functions;
+
+	public Occupation() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getIdoccupation() {
+		return this.idoccupation;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setIdoccupation(int idoccupation) {
+		this.idoccupation = idoccupation;
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Dapssco> getDapsscos() {
+		return this.dapsscos;
+	}
+
+	public void setDapsscos(List<Dapssco> dapsscos) {
+		this.dapsscos = dapsscos;
+	}
+
+	public Dapssco addDapssco(Dapssco dapssco) {
+		getDapsscos().add(dapssco);
+		dapssco.setOccupation(this);
+
+		return dapssco;
+	}
+
+	public Dapssco removeDapssco(Dapssco dapssco) {
+		getDapsscos().remove(dapssco);
+		dapssco.setOccupation(null);
+
+		return dapssco;
+	}
+
+	public List<Individual> getIndividuals() {
+		return this.individuals;
+	}
+
+	public void setIndividuals(List<Individual> individuals) {
+		this.individuals = individuals;
+	}
+
+	public Individual addIndividual(Individual individual) {
+		getIndividuals().add(individual);
+		individual.setOccupation(this);
+
+		return individual;
+	}
+
+	public Individual removeIndividual(Individual individual) {
+		getIndividuals().remove(individual);
+		individual.setOccupation(null);
+
+		return individual;
+	}
+
+	public List<Function> getFunctions() {
+		return this.functions;
+	}
+
+	public void setFunctions(List<Function> functions) {
+		this.functions = functions;
+	}
+
 }

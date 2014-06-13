@@ -2,7 +2,7 @@
 package au.com.redbackconsulting.skillsurvey.connectivity.helper;
 
 import com.google.gson.annotations.Expose;
-import au.com.redbackconsulting.scheduler.persistence.model.*;
+import com.sap.security.um.user.User;
 
 public class SFUser {
 
@@ -21,11 +21,13 @@ public class SFUser {
 	@Expose
 	public SFUser hr;
 
-	public void write(User user) {
-		user.setUserId(userId);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setEmail(email);
-	}
+	
+
+//	public void write(User user) {
+//		user.setUserId(userId);
+//		user.setFirstName(firstName);
+//		user.setLastName(lastName);
+//		user.setEmail(email);
+//	}
 
 }

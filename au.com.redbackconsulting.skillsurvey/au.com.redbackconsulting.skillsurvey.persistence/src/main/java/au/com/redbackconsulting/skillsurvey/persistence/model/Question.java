@@ -1,63 +1,78 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-
-
-@Entity
-@Table(name = "QUESTION", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_QUESTION, query = "select o from Question o where o.id = :id")})
-
-public class Question implements Serializable,IDBEntity {
 
 /**
-	 * 
-	 */
+ * The persistent class for the question database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
+public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-@Id
-@Column(name="ID")
-private Long id;
-	
-@Basic
-@Column(name="TEXT")
-	private String text;
-	
-@Basic
-@Column(name="STYLE")
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idquestion;
+
 	private String style;
 
-public Long getId() {
-	return id;
-}
+	private String text;
 
-public void setId(Long id) {
-	this.id = id;
-}
+	//bi-directional many-to-one association to UocQuestion
+	@OneToMany(mappedBy="question", fetch=FetchType.EAGER)
+	private List<UocQuestion> uocQuestions;
 
-public String getText() {
-	return text;
-}
+	public Question() {
+	}
 
-public void setText(String text) {
-	this.text = text;
-}
+	public int getIdquestion() {
+		return this.idquestion;
+	}
 
-public String getStyle() {
-	return style;
-}
+	public void setIdquestion(int idquestion) {
+		this.idquestion = idquestion;
+	}
 
-public void setStyle(String style) {
-	this.style = style;
-}
+	public String getStyle() {
+		return this.style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	public String getText() {
+		return this.text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public List<UocQuestion> getUocQuestions() {
+		return this.uocQuestions;
+	}
+
+	public void setUocQuestions(List<UocQuestion> uocQuestions) {
+		this.uocQuestions = uocQuestions;
+	}
+
+	public UocQuestion addUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().add(uocQuestion);
+		uocQuestion.setQuestion(this);
+
+		return uocQuestion;
+	}
+
+	public UocQuestion removeUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().remove(uocQuestion);
+		uocQuestion.setQuestion(null);
+
+		return uocQuestion;
+	}
 
 }

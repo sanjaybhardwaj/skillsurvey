@@ -47,6 +47,10 @@ public class DBQueries {
     
     public static final String GET_UOCQUESTION = "getUocQuestion";
     
+    public static final String GET_USER_BY_USER_ID ="getUserById";
+    
+    public static final String GET_ALL_MANAGED_USER ="getAllUser";
+    
     
     
     

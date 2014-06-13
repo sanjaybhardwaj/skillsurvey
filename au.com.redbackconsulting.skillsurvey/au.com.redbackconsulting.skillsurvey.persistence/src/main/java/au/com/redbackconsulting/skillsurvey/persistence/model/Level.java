@@ -1,69 +1,99 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-
-
-@Entity
-@Table(name = "LEVEL", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_LEVEL, query = "select o from Level o where o.id = :id ")})
-
-
-public class Level implements Serializable,IDBEntity {
 
 /**
-	 * 
-	 */
+ * The persistent class for the level database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Level.findAll", query="SELECT l FROM Level l")
+public class Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idlevel;
 
-@Id
-@Column(name="ID")
-private Long id;
-	
-	
-@Basic
-@Column(name="CODE")
-private String code;
+	private String code;
 
-@Basic
-@Column(name="DESCRIPTION")
 	private String description;
 
-public String getCode() {
-	return code;
-}
+	//bi-directional many-to-one association to Individual
+	@OneToMany(mappedBy="level", fetch=FetchType.EAGER)
+	private List<Individual> individuals;
 
-public void setCode(String code) {
-	this.code = code;
-}
+	//bi-directional many-to-many association to Dapssco
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="dapssco_levels"
+		, joinColumns={
+			@JoinColumn(name="level_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="dapssco_id")
+			}
+		)
+	private List<Dapssco> dapsscos;
 
-public String getDescription() {
-	return description;
-}
+	public Level() {
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
+	public int getIdlevel() {
+		return this.idlevel;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public void setIdlevel(int idlevel) {
+		this.idlevel = idlevel;
+	}
 
-public Long getId() {
-	// TODO Auto-generated method stub
-	return null;
-}
+	public String getCode() {
+		return this.code;
+	}
 
+	public void setCode(String code) {
+		this.code = code;
+	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Individual> getIndividuals() {
+		return this.individuals;
+	}
+
+	public void setIndividuals(List<Individual> individuals) {
+		this.individuals = individuals;
+	}
+
+	public Individual addIndividual(Individual individual) {
+		getIndividuals().add(individual);
+		individual.setLevel(this);
+
+		return individual;
+	}
+
+	public Individual removeIndividual(Individual individual) {
+		getIndividuals().remove(individual);
+		individual.setLevel(null);
+
+		return individual;
+	}
+
+	public List<Dapssco> getDapsscos() {
+		return this.dapsscos;
+	}
+
+	public void setDapsscos(List<Dapssco> dapsscos) {
+		this.dapsscos = dapsscos;
+	}
 
 }

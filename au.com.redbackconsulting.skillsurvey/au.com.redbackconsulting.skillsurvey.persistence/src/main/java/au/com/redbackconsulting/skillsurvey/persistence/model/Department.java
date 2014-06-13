@@ -1,73 +1,88 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
 
+/**
+ * The persistent class for the department database table.
+ * 
+ */
 @Entity
-@Table(name = "DEPARTMENT", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_DEPARTMENT, query = "select o from Department o where o.id = :id")})
-
-public class Department {
-	
-	
-	
-	
-	
+@NamedQuery(name="Department.findAll", query="SELECT d FROM Department d")
+public class Department implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID")
-	private Long id;
-	
-	@Basic
-	@Column(name="NAME")
-	private String Name;
-	
-	@Basic
-	@Column(name="DESCRIPTION")
-	private String Description;
-	
-	@Basic
-	@Column(name="CODE")
-	private String Code;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int iddepartment;
 
-	public Long getId() {
-		return id;
+	private String code;
+
+	private String description;
+
+	private String name;
+
+	//bi-directional many-to-one association to Individual
+	@OneToMany(mappedBy="department", fetch=FetchType.EAGER)
+	private List<Individual> individuals;
+
+	public Department() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getIddepartment() {
+		return this.iddepartment;
 	}
 
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
-	public String getDescription() {
-		return Description;
-	}
-
-	public void setDescription(String description) {
-		Description = description;
+	public void setIddepartment(int iddepartment) {
+		this.iddepartment = iddepartment;
 	}
 
 	public String getCode() {
-		return Code;
+		return this.code;
 	}
 
 	public void setCode(String code) {
-		Code = code;
+		this.code = code;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Individual> getIndividuals() {
+		return this.individuals;
+	}
+
+	public void setIndividuals(List<Individual> individuals) {
+		this.individuals = individuals;
+	}
+
+	public Individual addIndividual(Individual individual) {
+		getIndividuals().add(individual);
+		individual.setDepartment(this);
+
+		return individual;
+	}
+
+	public Individual removeIndividual(Individual individual) {
+		getIndividuals().remove(individual);
+		individual.setDepartment(null);
+
+		return individual;
+	}
 
 }

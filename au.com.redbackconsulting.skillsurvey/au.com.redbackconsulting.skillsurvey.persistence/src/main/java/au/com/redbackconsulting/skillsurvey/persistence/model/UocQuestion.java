@@ -1,66 +1,85 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-
-
-@Entity
-@Table(name = "UOCQUESTION", uniqueConstraints = { @UniqueConstraint(columnNames = { "ID" }) })
-@NamedQueries({ @NamedQuery(name = DBQueries.GET_UOCQUESTION, query = "select o from UocQuestion o where o.id = :id")})
-
-public class UocQuestion implements Serializable,IDBEntity {
 
 /**
-	 * 
-	 */
+ * The persistent class for the uoc_question database table.
+ * 
+ */
+@Entity
+@Table(name="uoc_question")
+@NamedQuery(name="UocQuestion.findAll", query="SELECT u FROM UocQuestion u")
+public class UocQuestion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-@Id
-@Column(name="ID")
-private Long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int iduocquestion;
 
-@Basic
-@Column(name="UOC_ID")
-private Long uoc_Id;
+	//bi-directional many-to-one association to SurveryAnswer
+	@OneToMany(mappedBy="uocQuestion", fetch=FetchType.EAGER)
+	private List<SurveryAnswer> surveryAnswers;
 
-@Basic
-@Column(name="QUESTIONID")
-private Long questionId;
+	//bi-directional many-to-one association to Question
+	@ManyToOne
+	@JoinColumn(name="question_id")
+	private Question question;
 
-public Long getId() {
-	return id;
+	//bi-directional many-to-one association to Uoc
+	@ManyToOne
+	@JoinColumn(name="uoc_id")
+	private Uoc uoc;
+
+	public UocQuestion() {
+	}
+
+	public int getIduocquestion() {
+		return this.iduocquestion;
+	}
+
+	public void setIduocquestion(int iduocquestion) {
+		this.iduocquestion = iduocquestion;
+	}
+
+	public List<SurveryAnswer> getSurveryAnswers() {
+		return this.surveryAnswers;
+	}
+
+	public void setSurveryAnswers(List<SurveryAnswer> surveryAnswers) {
+		this.surveryAnswers = surveryAnswers;
+	}
+
+	public SurveryAnswer addSurveryAnswer(SurveryAnswer surveryAnswer) {
+		getSurveryAnswers().add(surveryAnswer);
+		surveryAnswer.setUocQuestion(this);
+
+		return surveryAnswer;
+	}
+
+	public SurveryAnswer removeSurveryAnswer(SurveryAnswer surveryAnswer) {
+		getSurveryAnswers().remove(surveryAnswer);
+		surveryAnswer.setUocQuestion(null);
+
+		return surveryAnswer;
+	}
+
+	public Question getQuestion() {
+		return this.question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public Uoc getUoc() {
+		return this.uoc;
+	}
+
+	public void setUoc(Uoc uoc) {
+		this.uoc = uoc;
+	}
+
 }
-
-public void setId(Long id) {
-	this.id = id;
-}
-
-public Long getUoc_Id() {
-	return uoc_Id;
-}
-
-public void setUoc_Id(Long uoc_Id) {
-	this.uoc_Id = uoc_Id;
-}
-
-public Long getQuestionId() {
-	return questionId;
-}
-
-public void setQuestionId(Long questionId) {
-	this.questionId = questionId;
-}
-
-
-
-}
-
