@@ -10,6 +10,7 @@
   	<module>au.com.redbackconsulting.skillsurvey.ui</module>
   	<module>au.com.redbackconsulting.skillsurvey.persistence</module>
   	<module>au.com.redbackconsulting.skillsurvey.api</module>
+  	<module>au.com.redbackconsulting.skillsurvey.ui.config</module>
   </modules>
   <dependencies>
   	 <dependency>
