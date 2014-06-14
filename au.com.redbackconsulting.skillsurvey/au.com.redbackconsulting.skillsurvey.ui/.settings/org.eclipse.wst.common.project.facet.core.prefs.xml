@@ -1,4 +1,5 @@
 <root>
+  <facet id="jst.jaxrs"/>
   <facet id="jst.jsf">
     <node name="libprov">
       <attribute name="provider-id" value="jsf-no-op-library-provider"/>
