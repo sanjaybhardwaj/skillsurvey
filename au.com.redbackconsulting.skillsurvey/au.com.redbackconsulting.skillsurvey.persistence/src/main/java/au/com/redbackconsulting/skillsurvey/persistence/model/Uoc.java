@@ -27,21 +27,21 @@ public class Uoc implements Serializable,IDBEntity {
 	private String type;
 
 //	//bi-directional many-to-many association to UocGroup
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(
-//		name="uoc_group_members"
-//		, joinColumns={
-//			@JoinColumn(name="uoc_id")
-//			}
-//		, inverseJoinColumns={
-//			@JoinColumn(name="uoc_group_id")
-//			}
-//		)
-//	private List<UocGroup> uocGroups;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="uoc_group_members"
+		, joinColumns={
+			@JoinColumn(name="uoc_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="uoc_group_id")
+			}
+		)
+	private List<UocGroup> uocGroups;
 
 	//bi-directional many-to-one association to UocQuestion
-//	@OneToMany(mappedBy="uoc", fetch=FetchType.EAGER)
-//	private List<UocQuestion> uocQuestions;
+	@OneToMany(mappedBy="uoc", fetch=FetchType.EAGER)
+	private List<UocQuestion> uocQuestions;
 
 	public Uoc() {
 	}
@@ -78,35 +78,35 @@ public class Uoc implements Serializable,IDBEntity {
 		this.type = type;
 	}
 
-//	public List<UocGroup> getUocGroups() {
-//		return this.uocGroups;
-//	}
-//
-//	public void setUocGroups(List<UocGroup> uocGroups) {
-//		this.uocGroups = uocGroups;
-//	}
-//
-//	public List<UocQuestion> getUocQuestions() {
-//		return this.uocQuestions;
-//	}
-//
-//	public void setUocQuestions(List<UocQuestion> uocQuestions) {
-//		this.uocQuestions = uocQuestions;
-//	}
+	public List<UocGroup> getUocGroups() {
+		return this.uocGroups;
+	}
 
-//	public UocQuestion addUocQuestion(UocQuestion uocQuestion) {
-//		getUocQuestions().add(uocQuestion);
-//		uocQuestion.setUoc(this);
-//
-//		return uocQuestion;
-//	}
-//
-//	public UocQuestion removeUocQuestion(UocQuestion uocQuestion) {
-//		getUocQuestions().remove(uocQuestion);
-//		uocQuestion.setUoc(null);
-//
-//		return uocQuestion;
-//	}
+	public void setUocGroups(List<UocGroup> uocGroups) {
+		this.uocGroups = uocGroups;
+	}
+
+	public List<UocQuestion> getUocQuestions() {
+		return this.uocQuestions;
+	}
+
+	public void setUocQuestions(List<UocQuestion> uocQuestions) {
+		this.uocQuestions = uocQuestions;
+	}
+
+	public UocQuestion addUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().add(uocQuestion);
+		uocQuestion.setUoc(this);
+
+		return uocQuestion;
+	}
+
+	public UocQuestion removeUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().remove(uocQuestion);
+		uocQuestion.setUoc(null);
+
+		return uocQuestion;
+	}
 
 	@Override
 	public Long getId() {

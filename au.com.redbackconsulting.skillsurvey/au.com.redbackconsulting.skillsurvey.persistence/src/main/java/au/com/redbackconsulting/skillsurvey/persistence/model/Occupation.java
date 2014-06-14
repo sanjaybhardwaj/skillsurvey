@@ -25,12 +25,12 @@ public class Occupation implements Serializable, IDBEntity {
 	private String name;
 
 //	//bi-directional many-to-one association to Dapssco
-//	@OneToMany(mappedBy="occupation", fetch=FetchType.EAGER)
-//	private List<Dapssco> dapsscos;
+	@OneToMany(mappedBy="occupation", fetch=FetchType.EAGER)
+	private List<Dapssco> dapsscos;
 //
 //	//bi-directional many-to-one association to Individual
-//	@OneToMany(mappedBy="occupation", fetch=FetchType.EAGER)
-//	private List<Individual> individuals;
+	@OneToMany(mappedBy="occupation", fetch=FetchType.EAGER)
+	private List<Individual> individuals;
 
 	//bi-directional many-to-many association to Function
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -72,49 +72,49 @@ public class Occupation implements Serializable, IDBEntity {
 		this.name = name;
 	}
 
-//	public List<Dapssco> getDapsscos() {
-//		return this.dapsscos;
-//	}
-//
-//	public void setDapsscos(List<Dapssco> dapsscos) {
-//		this.dapsscos = dapsscos;
-//	}
-//
-//	public Dapssco addDapssco(Dapssco dapssco) {
-//		getDapsscos().add(dapssco);
-//		dapssco.setOccupation(this);
-//
-//		return dapssco;
-//	}
-//
-//	public Dapssco removeDapssco(Dapssco dapssco) {
-//		getDapsscos().remove(dapssco);
-//		dapssco.setOccupation(null);
-//
-//		return dapssco;
-//	}
-//
-//	public List<Individual> getIndividuals() {
-//		return this.individuals;
-//	}
-//
-//	public void setIndividuals(List<Individual> individuals) {
-//		this.individuals = individuals;
-//	}
-//
-//	public Individual addIndividual(Individual individual) {
-//		getIndividuals().add(individual);
-//		individual.setOccupation(this);
-//
-//		return individual;
-//	}
-//
-//	public Individual removeIndividual(Individual individual) {
-//		getIndividuals().remove(individual);
-//		individual.setOccupation(null);
-//
-//		return individual;
-//	}
+	public List<Dapssco> getDapsscos() {
+		return this.dapsscos;
+	}
+
+	public void setDapsscos(List<Dapssco> dapsscos) {
+		this.dapsscos = dapsscos;
+	}
+
+	public Dapssco addDapssco(Dapssco dapssco) {
+		getDapsscos().add(dapssco);
+		dapssco.setOccupation(this);
+
+		return dapssco;
+	}
+
+	public Dapssco removeDapssco(Dapssco dapssco) {
+		getDapsscos().remove(dapssco);
+		dapssco.setOccupation(null);
+
+		return dapssco;
+	}
+
+	public List<Individual> getIndividuals() {
+		return this.individuals;
+	}
+
+	public void setIndividuals(List<Individual> individuals) {
+		this.individuals = individuals;
+	}
+
+	public Individual addIndividual(Individual individual) {
+		getIndividuals().add(individual);
+		individual.setOccupation(this);
+
+		return individual;
+	}
+
+	public Individual removeIndividual(Individual individual) {
+		getIndividuals().remove(individual);
+		individual.setOccupation(null);
+
+		return individual;
+	}
 
 	public List<Function> getFunctions() {
 		return this.functions;

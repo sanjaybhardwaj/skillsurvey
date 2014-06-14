@@ -25,17 +25,17 @@ public class Role implements Serializable, IDBEntity {
 	private String name;
 
 //	//bi-directional many-to-many association to Claim
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(
-//		name="claima_assignment"
-//		, joinColumns={
-//			@JoinColumn(name="role_id")
-//			}
-//		, inverseJoinColumns={
-//			@JoinColumn(name="claim_id")
-//			}
-//		)
-//	private List<Claim> claims;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="claima_assignment"
+		, joinColumns={
+			@JoinColumn(name="role_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="claim_id")
+			}
+		)
+	private List<Claim> claims;
 
 	public Role() {
 	}
@@ -70,12 +70,12 @@ public class Role implements Serializable, IDBEntity {
 		return null;
 	}
 
-//	public List<Claim> getClaims() {
-//		return this.claims;
-//	}
+	public List<Claim> getClaims() {
+		return this.claims;
+	}
 //
-//	public void setClaims(List<Claim> claims) {
-//		this.claims = claims;
-//	}
+	public void setClaims(List<Claim> claims) {
+		this.claims = claims;
+	}
 
 }

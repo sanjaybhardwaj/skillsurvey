@@ -26,12 +26,12 @@ public class Level implements Serializable, IDBEntity {
 	private String description;
 
 	//bi-directional many-to-one association to Individual
-	//@OneToMany(mappedBy="level", fetch=FetchType.EAGER)
-	//private List<Individual> individuals;
+	@OneToMany(mappedBy="level", fetch=FetchType.EAGER)
+	private List<Individual> individuals;
 
 	//bi-directional many-to-many association to Dapssco
-	//@ManyToMany(fetch=FetchType.EAGER)
-	/*@JoinTable(
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
 		name="dapssco_levels"
 		, joinColumns={
 			@JoinColumn(name="level_id")
@@ -41,7 +41,7 @@ public class Level implements Serializable, IDBEntity {
 			}
 		)
 	private List<Dapssco> dapsscos;
-*/
+
 	public Level() {
 	}
 
@@ -69,11 +69,11 @@ public class Level implements Serializable, IDBEntity {
 		this.description = description;
 	}
 
-/*	public List<Individual> getIndividuals() {
+	public List<Individual> getIndividuals() {
 		return this.individuals;
 	}
-*/
-/*	public void setIndividuals(List<Individual> individuals) {
+
+	public void setIndividuals(List<Individual> individuals) {
 		this.individuals = individuals;
 	}
 
@@ -83,8 +83,8 @@ public class Level implements Serializable, IDBEntity {
 
 		return individual;
 	}
-*/
-/*	public Individual removeIndividual(Individual individual) {
+
+	public Individual removeIndividual(Individual individual) {
 		getIndividuals().remove(individual);
 		individual.setLevel(null);
 
@@ -98,7 +98,7 @@ public class Level implements Serializable, IDBEntity {
 	public void setDapsscos(List<Dapssco> dapsscos) {
 		this.dapsscos = dapsscos;
 	}
-*/
+
 	@Override
 	public Long getId() {
 		// TODO Auto-generated method stub

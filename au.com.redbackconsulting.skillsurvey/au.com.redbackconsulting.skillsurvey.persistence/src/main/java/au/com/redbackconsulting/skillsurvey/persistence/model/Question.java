@@ -25,8 +25,8 @@ public class Question implements Serializable, IDBEntity {
 	private String text;
 
 //	//bi-directional many-to-one association to UocQuestion
-//	@OneToMany(mappedBy="question", fetch=FetchType.EAGER)
-//	private List<UocQuestion> uocQuestions;
+	@OneToMany(mappedBy="question", fetch=FetchType.EAGER)
+	private List<UocQuestion> uocQuestions;
 
 	public Question() {
 	}
@@ -55,27 +55,27 @@ public class Question implements Serializable, IDBEntity {
 		this.text = text;
 	}
 //
-//	public List<UocQuestion> getUocQuestions() {
-//		return this.uocQuestions;
-//	}
-//
-//	public void setUocQuestions(List<UocQuestion> uocQuestions) {
-//		this.uocQuestions = uocQuestions;
-//	}
-//
-//	public UocQuestion addUocQuestion(UocQuestion uocQuestion) {
-//		getUocQuestions().add(uocQuestion);
-//		uocQuestion.setQuestion(this);
-//
-//		return uocQuestion;
-//	}
-//
-//	public UocQuestion removeUocQuestion(UocQuestion uocQuestion) {
-//		getUocQuestions().remove(uocQuestion);
-//		uocQuestion.setQuestion(null);
-//
-//		return uocQuestion;
-//	}
+	public List<UocQuestion> getUocQuestions() {
+		return this.uocQuestions;
+	}
+
+	public void setUocQuestions(List<UocQuestion> uocQuestions) {
+		this.uocQuestions = uocQuestions;
+	}
+
+	public UocQuestion addUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().add(uocQuestion);
+		uocQuestion.setQuestion(this);
+
+		return uocQuestion;
+	}
+
+	public UocQuestion removeUocQuestion(UocQuestion uocQuestion) {
+		getUocQuestions().remove(uocQuestion);
+		uocQuestion.setQuestion(null);
+
+		return uocQuestion;
+	}
 
 	@Override
 	public Long getId() {

@@ -8,35 +8,39 @@ import java.util.List;
 
 
 /**
- * The persistent class for the need database table.
+ * The persistent class for the pathway database table.
  * 
  */
 @Entity
-@NamedQuery(name="Need.findAll", query="SELECT n FROM Need n")
-public class Need implements Serializable, IDBEntity {
+@NamedQuery(name="Pathway.findAll", query="SELECT p FROM Pathway p")
+public class Pathway implements Serializable,IDBEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long idneed;
+	private int idpathway;
 
 	private String description;
 
 	private String name;
+//
+//	//bi-directional many-to-one association to Survey
+	@OneToMany(mappedBy="pathway", fetch=FetchType.EAGER)
+	private List<Survey> surveys;
 
 	//bi-directional many-to-one association to UocGroup
-	@OneToMany(mappedBy="need", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="pathway", fetch=FetchType.EAGER)
 	private List<UocGroup> uocGroups;
 
-	public Need() {
+	public Pathway() {
 	}
 
-	public long getIdneed() {
-		return this.idneed;
+	public int getIdpathway() {
+		return this.idpathway;
 	}
 
-	public void setIdneed(long idneed) {
-		this.idneed = idneed;
+	public void setIdpathway(int idpathway) {
+		this.idpathway = idpathway;
 	}
 
 	public String getDescription() {
@@ -58,7 +62,29 @@ public class Need implements Serializable, IDBEntity {
 	@Override
 	public Long getId() {
 		// TODO Auto-generated method stub
-		return Long.valueOf(idneed);
+		return null;
+	}
+
+	public List<Survey> getSurveys() {
+		return this.surveys;
+	}
+
+	public void setSurveys(List<Survey> surveys) {
+		this.surveys = surveys;
+	}
+
+	public Survey addSurvey(Survey survey) {
+		getSurveys().add(survey);
+		survey.setPathway(this);
+
+		return survey;
+	}
+
+	public Survey removeSurvey(Survey survey) {
+		getSurveys().remove(survey);
+		survey.setPathway(null);
+
+		return survey;
 	}
 
 	public List<UocGroup> getUocGroups() {
@@ -68,17 +94,17 @@ public class Need implements Serializable, IDBEntity {
 	public void setUocGroups(List<UocGroup> uocGroups) {
 		this.uocGroups = uocGroups;
 	}
-
+//
 	public UocGroup addUocGroup(UocGroup uocGroup) {
 		getUocGroups().add(uocGroup);
-		uocGroup.setNeed(this);
+		uocGroup.setPathway(this);
 
 		return uocGroup;
 	}
 
 	public UocGroup removeUocGroup(UocGroup uocGroup) {
 		getUocGroups().remove(uocGroup);
-		uocGroup.setNeed(null);
+		uocGroup.setPathway(null);
 
 		return uocGroup;
 	}

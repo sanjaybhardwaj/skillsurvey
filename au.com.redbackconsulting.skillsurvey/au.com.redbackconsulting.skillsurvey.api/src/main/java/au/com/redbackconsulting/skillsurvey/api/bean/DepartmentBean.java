@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Department;
+
 import com.google.gson.annotations.Expose;
 
 public class DepartmentBean {
@@ -50,6 +52,16 @@ public class DepartmentBean {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public static DepartmentBean get(Department entity) {
+		DepartmentBean bean = new DepartmentBean();
+		bean.setCode(entity.getCode());
+		bean.setDescription(entity.getDescription());
+		bean.setId(entity.getIddepartment());
+		bean.setName(entity.getName());
+		
+		return bean;
 	}
 
 

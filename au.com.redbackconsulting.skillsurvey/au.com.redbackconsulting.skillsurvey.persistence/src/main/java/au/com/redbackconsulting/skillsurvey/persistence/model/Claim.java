@@ -23,8 +23,8 @@ public class Claim implements Serializable, IDBEntity {
 	private String code;
 
 //	//bi-directional many-to-many association to Role
-//	@ManyToMany(mappedBy="claims", fetch=FetchType.EAGER)
-//	private List<Role> roles;
+	@ManyToMany(mappedBy="claims", fetch=FetchType.EAGER)
+	private List<Role> roles;
 
 	public Claim() {
 	}
@@ -51,12 +51,12 @@ public class Claim implements Serializable, IDBEntity {
 		return idclaim;
 	}
 
-//	public List<Role> getRoles() {
-//		return this.roles;
-//	}
+	public List<Role> getRoles() {
+		return this.roles;
+	}
 //
-//	public void setRoles(List<Role> roles) {
-//		this.roles = roles;
-//	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 }

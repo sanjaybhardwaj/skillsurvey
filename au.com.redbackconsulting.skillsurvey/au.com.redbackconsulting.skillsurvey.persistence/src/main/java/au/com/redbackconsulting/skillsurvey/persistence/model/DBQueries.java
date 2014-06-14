@@ -3,7 +3,7 @@ package au.com.redbackconsulting.skillsurvey.persistence.model;
 public class DBQueries {
 
    
-    public static final String GET_CLAIMASSINGMENT = "getClaimAssingment";    
+    public static final String GET_CLAIMASSIGNMENT = "getClaimAssingment";    
     public static final String GET_CLAIM = "getClaim";   
     public static final String GET_DAPSSCO = "getDepssco";   
     

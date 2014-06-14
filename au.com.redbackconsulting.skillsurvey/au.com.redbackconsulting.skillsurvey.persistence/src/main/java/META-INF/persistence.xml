@@ -16,6 +16,23 @@
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Function</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Claim</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Occupation</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Department</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.RoleAssignmentPK</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.RoleAssignment</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Pathway</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocQuestion</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.SurveryAnswer</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Survey</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Dapssco</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Individual</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.SurveryAnswerPK</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.DapsscoLevel</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.DapsscoSkills</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocGroupMembers</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocGroup</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Supervisons</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.ClaimAssignments</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.FunctionOccupations</class>
 		
 			<exclude-unlisted-classes>true</exclude-unlisted-classes>
 					<properties>
