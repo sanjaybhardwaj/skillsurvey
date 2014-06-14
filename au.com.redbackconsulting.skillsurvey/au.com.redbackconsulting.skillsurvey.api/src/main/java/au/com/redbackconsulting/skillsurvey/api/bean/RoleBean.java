@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Role;
+
 import com.google.gson.annotations.Expose;
 
 public class RoleBean {
@@ -32,6 +34,15 @@ public class RoleBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public static RoleBean get(Role entity) {
+		RoleBean bean = new RoleBean();
+		
+		bean.setDescription(entity.getDescription());
+		bean.setId(entity.getIdrole());
+		bean.setName(entity.getName());
+		return bean;
 	}
 	
 	

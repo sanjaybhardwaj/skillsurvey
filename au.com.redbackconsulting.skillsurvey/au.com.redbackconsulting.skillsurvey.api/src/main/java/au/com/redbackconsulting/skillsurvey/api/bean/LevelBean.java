@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Level;
+
 import com.google.gson.annotations.Expose;
 
 public class LevelBean {
@@ -35,6 +37,15 @@ public class LevelBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public static LevelBean get(Level entity){
+		LevelBean bean = new LevelBean();
+		bean.setCode(entity.getCode());
+		bean.setDescription(entity.getDescription());
+		bean.setId(entity.getId());
+		return bean;
+		
 	}
 	
 }

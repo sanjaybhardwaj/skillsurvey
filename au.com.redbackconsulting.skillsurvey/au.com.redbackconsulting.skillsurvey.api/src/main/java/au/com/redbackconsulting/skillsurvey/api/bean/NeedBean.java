@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Need;
+
 import com.google.gson.annotations.Expose;
 
 public class NeedBean {
@@ -35,6 +37,14 @@ public class NeedBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public static NeedBean get(Need entity) {
+	NeedBean bean = new NeedBean();
+	bean.setId(Long.valueOf(entity.getIdneed()));
+	bean.setDescription(entity.getDescription());
+	bean.setName(entity.getName());
+		return bean;
 	}
 	
 	

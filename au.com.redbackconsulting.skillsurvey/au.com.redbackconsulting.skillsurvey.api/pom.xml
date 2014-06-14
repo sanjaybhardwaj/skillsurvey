@@ -43,10 +43,10 @@
 			<version>1.7.2</version>
 			<scope>provided</scope>
 		</dependency>
-	 <dependency>
+<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20090211</version>
+			<version>20140107</version>
 		</dependency>
 		<!-- CXF Resful services -->
 		<dependency>

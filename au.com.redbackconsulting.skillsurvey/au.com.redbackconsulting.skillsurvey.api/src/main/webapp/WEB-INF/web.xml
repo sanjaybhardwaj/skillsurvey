@@ -795,6 +795,12 @@ standard deployment descriptor.
     <filter-class>au.com.redbackconsulting.skillsurvey.service.EntityManagerInterceptor</filter-class>
   </filter>
   <filter>
+    <filter-name>SessionCreateFilter</filter-name>
+    <display-name>SessionCreateFilter</display-name>
+    <filter-class>au.com.redbackconsulting.skillsurvey.service.SessionCreateFilter</filter-class>
+  </filter> 
+  
+  <filter>
     <display-name>APIFilter</display-name>
     <filter-name>APIFilter</filter-name>
     <filter-class>au.com.redbackconsulting.skillsurvey.service.AuthorizationFilter</filter-class>
@@ -868,7 +874,7 @@ standard deployment descriptor.
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>Protected Area</web-resource-name>
-      <url-pattern>/*</url-pattern>
+      <url-pattern>/api/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>Administrator</role-name>

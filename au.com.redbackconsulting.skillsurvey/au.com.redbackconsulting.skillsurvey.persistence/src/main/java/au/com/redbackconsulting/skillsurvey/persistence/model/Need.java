@@ -1,7 +1,9 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -11,29 +13,29 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Need.findAll", query="SELECT n FROM Need n")
-public class Need implements Serializable {
+public class Need implements Serializable, IDBEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idneed;
+	private long idneed;
 
 	private String description;
 
 	private String name;
 
 	//bi-directional many-to-one association to UocGroup
-	@OneToMany(mappedBy="need", fetch=FetchType.EAGER)
-	private List<UocGroup> uocGroups;
+//	@OneToMany(mappedBy="need", fetch=FetchType.EAGER)
+//	private List<UocGroup> uocGroups;
+//
+//	public Need() {
+//	}
 
-	public Need() {
-	}
-
-	public int getIdneed() {
+	public long getIdneed() {
 		return this.idneed;
 	}
 
-	public void setIdneed(int idneed) {
+	public void setIdneed(long idneed) {
 		this.idneed = idneed;
 	}
 
@@ -53,26 +55,32 @@ public class Need implements Serializable {
 		this.name = name;
 	}
 
-	public List<UocGroup> getUocGroups() {
-		return this.uocGroups;
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return Long.valueOf(idneed);
 	}
 
-	public void setUocGroups(List<UocGroup> uocGroups) {
-		this.uocGroups = uocGroups;
-	}
-
-	public UocGroup addUocGroup(UocGroup uocGroup) {
-		getUocGroups().add(uocGroup);
-		uocGroup.setNeed(this);
-
-		return uocGroup;
-	}
-
-	public UocGroup removeUocGroup(UocGroup uocGroup) {
-		getUocGroups().remove(uocGroup);
-		uocGroup.setNeed(null);
-
-		return uocGroup;
-	}
+//	public List<UocGroup> getUocGroups() {
+//		return this.uocGroups;
+//	}
+//
+//	public void setUocGroups(List<UocGroup> uocGroups) {
+//		this.uocGroups = uocGroups;
+//	}
+//
+//	public UocGroup addUocGroup(UocGroup uocGroup) {
+//		getUocGroups().add(uocGroup);
+//		uocGroup.setNeed(this);
+//
+//		return uocGroup;
+//	}
+//
+//	public UocGroup removeUocGroup(UocGroup uocGroup) {
+//		getUocGroups().remove(uocGroup);
+//		uocGroup.setNeed(null);
+//
+//		return uocGroup;
+//	}
 
 }

@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Function;
+
 import com.google.gson.annotations.Expose;
 
 public class FunctionBean {
@@ -38,6 +40,14 @@ public class FunctionBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public static FunctionBean get(Function entity) {
+		FunctionBean bean = new FunctionBean();
+		bean.setDescription(entity.getDescription());
+		bean.setId(entity.getId());
+		bean.setName(entity.getName());
+		return null;
 	}
 	
 	

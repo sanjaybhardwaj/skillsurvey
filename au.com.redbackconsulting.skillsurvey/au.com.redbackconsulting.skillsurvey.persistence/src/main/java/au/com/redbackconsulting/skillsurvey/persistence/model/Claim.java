@@ -1,7 +1,9 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -11,27 +13,27 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Claim.findAll", query="SELECT c FROM Claim c")
-public class Claim implements Serializable {
+public class Claim implements Serializable, IDBEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idclaim;
+	private long idclaim;
 
 	private String code;
 
-	//bi-directional many-to-many association to Role
-	@ManyToMany(mappedBy="claims", fetch=FetchType.EAGER)
-	private List<Role> roles;
+//	//bi-directional many-to-many association to Role
+//	@ManyToMany(mappedBy="claims", fetch=FetchType.EAGER)
+//	private List<Role> roles;
 
 	public Claim() {
 	}
 
-	public int getIdclaim() {
+	public long getIdclaim() {
 		return this.idclaim;
 	}
 
-	public void setIdclaim(int idclaim) {
+	public void setIdclaim(long idclaim) {
 		this.idclaim = idclaim;
 	}
 
@@ -43,12 +45,18 @@ public class Claim implements Serializable {
 		this.code = code;
 	}
 
-	public List<Role> getRoles() {
-		return this.roles;
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return idclaim;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+//	public List<Role> getRoles() {
+//		return this.roles;
+//	}
+//
+//	public void setRoles(List<Role> roles) {
+//		this.roles = roles;
+//	}
 
 }

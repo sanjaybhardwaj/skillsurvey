@@ -5,9 +5,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
-
-
-import au.com.redbackconsulting.skillsurvey.api.SystemService;
+import au.com.redbackconsulting.skillsurvey.api.LevelService;
 import au.com.redbackconsulting.skillsurvey.api.util.GsonMessageBodyHandler;
 
 
@@ -18,7 +16,8 @@ public class ApplicationConfig extends Application {
     public ApplicationConfig() {
         singletons.add(new GsonMessageBodyHandler<>());
         //singletons.add(new UserService());
-        singletons.add(new SystemService());
+        //singletons.add(new SystemService());
+        singletons.add(new LevelService());
     }
 
     @Override

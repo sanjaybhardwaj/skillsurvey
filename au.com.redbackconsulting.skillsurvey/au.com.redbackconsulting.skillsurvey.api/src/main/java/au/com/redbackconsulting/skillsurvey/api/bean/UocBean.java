@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Uoc;
+
 import com.google.gson.annotations.Expose;
 
 public class UocBean {
@@ -42,6 +44,15 @@ public class UocBean {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public static UocBean get(Uoc entity) {
+		UocBean bean = new UocBean();
+		bean.setId(entity.getId());
+		bean.setDescription(entity.getDescription());
+		bean.setName(entity.getName());
+		bean.setType(entity.getType());
+		return null;
 	}
 
 

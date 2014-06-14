@@ -18,7 +18,7 @@ import au.com.redbackconsulting.skillsurvey.persistence.manager.EntityManagerPro
 import au.com.redbackconsulting.skillsurvey.persistence.model.IDBEntity;
 
 
-public class BasicDAO<T extends IDBEntity> {
+public abstract class BasicDAO<T extends IDBEntity> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -52,6 +52,8 @@ public class BasicDAO<T extends IDBEntity> {
         return merge;
     }
 
+
+    
     public T saveNew(T entity) {
         final EntityManager em = emProvider.get();
         em.getTransaction().begin();
@@ -59,6 +61,15 @@ public class BasicDAO<T extends IDBEntity> {
 
         em.getTransaction().commit();
         return entity;
+    }
+
+    public void delete(T entity) {
+        final EntityManager em = emProvider.get();
+        em.getTransaction().begin();
+em.remove(entity);
+
+        em.getTransaction().commit();
+        return;
     }
 
     public void deleteAll() {
@@ -78,13 +89,15 @@ public class BasicDAO<T extends IDBEntity> {
         final EntityManager em = emProvider.get();
         return getById(id, em);
     }
+    
+    protected abstract String getidFieldName();
 
     @SuppressWarnings("unchecked")
     private T getById(long id, EntityManager em) {
         T t = null;
 
         try {
-            Query query = em.createQuery("select u from " + getTableName() + " u where u.id = :id"); //$NON-NLS-1$ //$NON-NLS-2$
+            Query query = em.createQuery("select u from " + getTableName() + " u where u."+getidFieldName() +" = :id"); //$NON-NLS-1$ //$NON-NLS-2$
             query.setParameter("id", id); //$NON-NLS-1$
             t = (T) query.getSingleResult();
         } catch (NoResultException e) {

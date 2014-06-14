@@ -26,20 +26,7 @@ public class BaseService {
 
 	//////protected UserDAO userDAO = new UserDAO();
 
-	protected String getLoggedInUserId() {
-		if (request == null) {
-			throw new IllegalArgumentException("Request must not be null.");
-		}
-		String userId = null;
-
-		Principal userPrincipal = ((HttpServletRequest) request).getUserPrincipal();
-		if (userPrincipal != null) {
-			userId = userPrincipal.getName();
-		}
-
-		return userId;
-	}
-
+/*s*/
 //	protected User getLoggedInUser() {
 //		return userDAO.getByUserId(getLoggedInUserId());
 //	}
