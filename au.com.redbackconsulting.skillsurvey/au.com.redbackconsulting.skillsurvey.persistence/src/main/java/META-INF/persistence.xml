@@ -9,7 +9,6 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Level</class>
-		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocQuestionBean</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Uoc</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Question</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Role</class>
