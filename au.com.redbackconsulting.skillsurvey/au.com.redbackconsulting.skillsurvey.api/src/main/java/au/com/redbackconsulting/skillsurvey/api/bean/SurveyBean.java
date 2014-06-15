@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Survey;
+
 import com.google.gson.annotations.Expose;
 
 public class SurveyBean {
@@ -63,6 +65,18 @@ public class SurveyBean {
 
 	public void setPathwayId(Long pathwayId) {
 		this.pathwayId = pathwayId;
+	}
+
+	public static SurveyBean get(Survey entity) {
+		SurveyBean bean = new SurveyBean();
+		//TODO
+		//bean.setCompletedAt(entity.getCompletedAt());
+		//bean.setDapssco_Id(entity.getDapssco().getIddepssco());
+		//bean.setId(entity.getId());
+		bean.setIndividualId(entity.getIndividual().getId());
+		bean.setPathwayId(entity.getPathway().getId());
+		bean.setStartedAt(entity.getStartedAt().toString());
+		return bean;
 	}
 	
 	

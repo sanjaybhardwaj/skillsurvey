@@ -2,7 +2,6 @@
 package au.com.redbackconsulting.skillsurvey.connectivity.helper;
 
 import com.google.gson.annotations.Expose;
-import com.sap.security.um.user.User;
 
 public class SFUser {
 

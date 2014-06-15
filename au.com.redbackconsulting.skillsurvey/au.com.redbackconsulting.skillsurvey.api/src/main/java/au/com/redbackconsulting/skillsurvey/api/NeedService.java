@@ -17,11 +17,8 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import au.com.redbackconsulting.skillsurvey.api.bean.LevelBean;
 import au.com.redbackconsulting.skillsurvey.api.bean.NeedBean;
-import au.com.redbackconsulting.skillsurvey.persistence.LevelDAO;
 import au.com.redbackconsulting.skillsurvey.persistence.NeedDAO;
-import au.com.redbackconsulting.skillsurvey.persistence.model.Level;
 import au.com.redbackconsulting.skillsurvey.persistence.model.Need;
 
 

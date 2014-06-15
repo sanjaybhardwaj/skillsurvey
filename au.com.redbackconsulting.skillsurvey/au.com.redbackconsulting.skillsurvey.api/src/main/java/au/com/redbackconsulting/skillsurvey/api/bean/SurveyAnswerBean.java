@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.SurveryAnswer;
+
 import com.google.gson.annotations.Expose;
 
 public class SurveyAnswerBean {
@@ -42,6 +44,15 @@ public class SurveyAnswerBean {
 
 	public void setAnsweredAt(String answeredAt) {
 		this.answeredAt = answeredAt;
+	}
+
+	public static SurveyAnswerBean get(SurveryAnswer entity) {
+		SurveyAnswerBean bean = new SurveyAnswerBean();
+		bean.setAnsweredAt(entity.getAnsweredAt());
+		//bean.setSurveyId((entity.getSurvey().getIdsurvey());
+		bean.setUoc_QuestionId(entity.getUocQuestion().getIduocquestion());
+		bean.setValue(entity.getValue());
+		return bean;
 	}
 	
 	

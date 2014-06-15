@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.DapsscoSkills;
+
 import com.google.gson.annotations.Expose;
 
 public class DapsscoSkillsBean {
@@ -26,6 +28,13 @@ public class DapsscoSkillsBean {
 
 	public void setUoc_GroupId(Long uoc_GroupId) {
 		this.uoc_GroupId = uoc_GroupId;
+	}
+
+	public static DapsscoSkillsBean get(DapsscoSkills entity) {
+	DapsscoSkillsBean bean = new DapsscoSkillsBean();
+	bean.setDapssco_Id(entity.getDapssco_Id());
+	bean.setUoc_GroupId(entity.getUoc_GroupId());
+		return bean;
 	}
 	
 	

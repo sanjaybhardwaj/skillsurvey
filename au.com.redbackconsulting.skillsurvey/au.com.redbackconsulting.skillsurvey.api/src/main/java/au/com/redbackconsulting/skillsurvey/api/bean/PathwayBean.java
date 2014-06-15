@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Pathway;
+
 import com.google.gson.annotations.Expose;
 
 public class PathwayBean {
@@ -32,6 +34,15 @@ public class PathwayBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public static PathwayBean get(Pathway entity) {
+		PathwayBean bean = new PathwayBean();
+		bean.setDescription(entity.getDescription());
+		//TODO
+		//bean.setId(entity.getIdpathway());
+		bean.setName(entity.getName());
+		return bean;
 	}
 	
 	

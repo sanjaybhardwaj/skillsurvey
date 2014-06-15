@@ -1,8 +1,6 @@
 
 package au.com.redbackconsulting.skillsurvey.api;
 
-import java.security.Principal;
-
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

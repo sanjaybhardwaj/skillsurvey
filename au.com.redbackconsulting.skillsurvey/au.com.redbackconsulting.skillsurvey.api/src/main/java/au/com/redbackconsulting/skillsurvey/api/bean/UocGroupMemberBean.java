@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.UocGroupMembers;
+
 import com.google.gson.annotations.Expose;
 
 public class UocGroupMemberBean {
@@ -22,6 +24,13 @@ public class UocGroupMemberBean {
 
 	public void setUoc_Id(Long uoc_Id) {
 		this.uoc_Id = uoc_Id;
+	}
+
+	public static UocGroupMemberBean get(UocGroupMembers entity) {
+	UocGroupMemberBean bean = new UocGroupMemberBean();
+	bean.setUoc_GroupId(entity.getUoc_GroupId());
+	bean.setUoc_Id(entity.getUoc_Id());
+		return bean;
 	}
 
 	

@@ -18,11 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import au.com.redbackconsulting.skillsurvey.api.bean.FunctionBean;
-import au.com.redbackconsulting.skillsurvey.api.bean.RoleBean;
 import au.com.redbackconsulting.skillsurvey.persistence.FunctionDAO;
-import au.com.redbackconsulting.skillsurvey.persistence.RoleDAO;
 import au.com.redbackconsulting.skillsurvey.persistence.model.Function;
-import au.com.redbackconsulting.skillsurvey.persistence.model.Role;
 
 @Path("/function")
 public class FunctionService extends BaseService {

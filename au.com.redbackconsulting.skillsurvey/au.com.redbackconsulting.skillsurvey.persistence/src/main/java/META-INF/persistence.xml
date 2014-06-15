@@ -9,7 +9,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Level</class>
-		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Need</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.UocQuestionBean</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Uoc</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Question</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Role</class>
@@ -33,10 +33,11 @@
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Supervisons</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.ClaimAssignments</class>
 		<class>au.com.redbackconsulting.skillsurvey.persistence.model.FunctionOccupations</class>
+		<class>au.com.redbackconsulting.skillsurvey.persistence.model.Need</class>
 		
 			<exclude-unlisted-classes>true</exclude-unlisted-classes>
 					<properties>
-						<property name="eclipselink.ddl-generation" value="create-tables"/>
+						<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 						<property name="eclipselink.ddl-generation.output-mode" value="database"/>
 					</properties>
 		</persistence-unit>

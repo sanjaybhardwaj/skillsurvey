@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.UocQuestion;
+
 import com.google.gson.annotations.Expose;
 
 public class UocQuestionBean {
@@ -32,6 +34,14 @@ public Long getQuestionId() {
 
 public void setQuestionId(Long questionId) {
 	this.questionId = questionId;
+}
+
+public static UocQuestionBean get(UocQuestion entity) {
+	UocQuestionBean bean = new UocQuestionBean();
+	bean.setId(entity.getIduocquestion());
+	bean.setQuestionId(entity.getQuestion().getIdquestion());
+	bean.setUoc_Id(entity.getUoc().getIduoc());
+	return bean;
 }
 
 

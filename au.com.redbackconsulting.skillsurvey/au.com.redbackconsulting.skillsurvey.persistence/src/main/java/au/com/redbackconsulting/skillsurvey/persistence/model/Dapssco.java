@@ -21,7 +21,7 @@ public class Dapssco implements Serializable, IDBEntity {
 	private int iddepssco;
 
 	@Column(name="level_id")
-	private int levelId;
+	private long levelId;
 
 	//bi-directional many-to-one association to Occupation
 	@ManyToOne
@@ -60,11 +60,11 @@ public class Dapssco implements Serializable, IDBEntity {
 		this.iddepssco = iddepssco;
 	}
 
-	public int getLevelId() {
+	public long getLevelId() {
 		return this.levelId;
 	}
 
-	public void setLevelId(int levelId) {
+	public void setLevelId(long levelId) {
 		this.levelId = levelId;
 	}
 

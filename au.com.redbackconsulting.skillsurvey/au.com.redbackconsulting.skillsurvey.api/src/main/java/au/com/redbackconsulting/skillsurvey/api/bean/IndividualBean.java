@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Individual;
+
 import com.google.gson.annotations.Expose;
 
 public class IndividualBean {
@@ -90,6 +92,20 @@ public class IndividualBean {
 
 	public void setLevelId(Long levelId) {
 		this.levelId = levelId;
+	}
+
+	public static IndividualBean get(Individual entity) {
+		IndividualBean bean = new IndividualBean();
+		bean.setDepartmentId(entity.getDepartment().getIddepartment());
+		bean.setFunctionId(entity.getFunction().getIdfunction());
+		bean.setGender(entity.getGender());
+		//TODO
+		//bean.setId(entity.getIdindividual());
+		bean.setLevelId(entity.getLevel().getIdlevel());
+		//bean.setLoginPassword(loginPassword);
+		bean.setName(entity.getName());
+		bean.setOccupationId(entity.getOccupation().getIdoccupation());
+		return bean;
 	}
 
 	

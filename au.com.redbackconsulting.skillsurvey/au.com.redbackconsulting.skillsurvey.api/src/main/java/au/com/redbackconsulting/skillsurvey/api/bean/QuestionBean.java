@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Question;
+
 import com.google.gson.annotations.Expose;
 
 public class QuestionBean {
@@ -32,6 +34,14 @@ public class QuestionBean {
 
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public static QuestionBean get(Question entity) {
+	QuestionBean bean = new QuestionBean();
+	bean.setId(entity.getIdquestion());
+	bean.setStyle(entity.getStyle());
+	bean.setText(entity.getText());
+		return bean;
 	}
 	
 

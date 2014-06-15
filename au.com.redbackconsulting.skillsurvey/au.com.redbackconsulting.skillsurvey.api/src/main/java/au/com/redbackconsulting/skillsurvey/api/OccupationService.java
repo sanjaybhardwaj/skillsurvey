@@ -17,11 +17,8 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import au.com.redbackconsulting.skillsurvey.api.bean.NeedBean;
 import au.com.redbackconsulting.skillsurvey.api.bean.OccupationBean;
-import au.com.redbackconsulting.skillsurvey.persistence.NeedDAO;
 import au.com.redbackconsulting.skillsurvey.persistence.OccupationDAO;
-import au.com.redbackconsulting.skillsurvey.persistence.model.Need;
 import au.com.redbackconsulting.skillsurvey.persistence.model.Occupation;
 
 @Path("/need")

@@ -18,10 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import au.com.redbackconsulting.skillsurvey.api.bean.DepartmentBean;
-import au.com.redbackconsulting.skillsurvey.api.bean.NeedBean;
 import au.com.redbackconsulting.skillsurvey.persistence.DepartmentDAO;
 import au.com.redbackconsulting.skillsurvey.persistence.model.Department;
-import au.com.redbackconsulting.skillsurvey.persistence.model.Need;
 
 @Path("/department")
 public class DepartmentService  extends BaseService{

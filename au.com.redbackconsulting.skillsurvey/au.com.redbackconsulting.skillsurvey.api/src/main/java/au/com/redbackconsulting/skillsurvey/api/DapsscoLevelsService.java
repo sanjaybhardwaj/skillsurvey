@@ -17,15 +17,12 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import au.com.redbackconsulting.skillsurvey.api.bean.ClaimBean;
 import au.com.redbackconsulting.skillsurvey.api.bean.DapsscoLevelsBean;
-import au.com.redbackconsulting.skillsurvey.persistence.ClaimDAO;
 import au.com.redbackconsulting.skillsurvey.persistence.DapsscoLevelDAO;
-import au.com.redbackconsulting.skillsurvey.persistence.model.Claim;
 import au.com.redbackconsulting.skillsurvey.persistence.model.DapsscoLevel;
 
 
-@Path("/claim")
+@Path("/depsscolevels")
 public class DapsscoLevelsService extends BaseService{
 	 private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	 private DapsscoLevelDAO dao =null;

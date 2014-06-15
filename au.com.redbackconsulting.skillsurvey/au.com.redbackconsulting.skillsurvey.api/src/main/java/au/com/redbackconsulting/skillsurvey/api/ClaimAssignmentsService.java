@@ -18,11 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import au.com.redbackconsulting.skillsurvey.api.bean.ClaimAssignmentsBean;
-import au.com.redbackconsulting.skillsurvey.api.bean.NeedBean;
 import au.com.redbackconsulting.skillsurvey.persistence.ClaimAssingmentsDAO;
-import au.com.redbackconsulting.skillsurvey.persistence.NeedDAO;
 import au.com.redbackconsulting.skillsurvey.persistence.model.ClaimAssignments;
-import au.com.redbackconsulting.skillsurvey.persistence.model.Need;
 
 @Path("/claimassignments")
 public class ClaimAssignmentsService extends BaseService {

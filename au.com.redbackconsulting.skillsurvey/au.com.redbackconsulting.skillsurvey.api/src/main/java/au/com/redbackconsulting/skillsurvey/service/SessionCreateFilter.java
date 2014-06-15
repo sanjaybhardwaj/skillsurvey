@@ -1,7 +1,6 @@
 package au.com.redbackconsulting.skillsurvey.service;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.Filter;
@@ -15,12 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import au.com.redbackconsulting.skillsurvey.connectivity.CoreODataConnector;
-import au.com.redbackconsulting.skillsurvey.connectivity.helper.SFUser;
-
-
-import com.sap.security.um.user.PersistenceException;
-import com.sap.security.um.user.UnsupportedUserAttributeException;
 import com.sap.security.um.user.UserProvider;
 
 @SuppressWarnings("nls")

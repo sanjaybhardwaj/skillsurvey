@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.UocGroup;
+
 import com.google.gson.annotations.Expose;
 
 public class UocGroupBean {
@@ -42,6 +44,11 @@ public class UocGroupBean {
 
 	public void setPathwayId(Long pathwayId) {
 		this.pathwayId = pathwayId;
+	}
+
+	public static UocGroupBean get(UocGroup entity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
