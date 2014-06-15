@@ -1,7 +1,9 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -11,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Individual.findAll", query="SELECT i FROM Individual i")
-public class Individual implements Serializable {
+public class Individual implements Serializable,IDBEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -204,6 +206,12 @@ public class Individual implements Serializable {
 		survey.setIndividual(null);
 
 		return survey;
+	}
+
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

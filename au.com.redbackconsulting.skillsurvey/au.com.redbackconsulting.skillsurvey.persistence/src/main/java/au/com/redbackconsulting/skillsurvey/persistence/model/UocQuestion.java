@@ -1,7 +1,9 @@
 package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -12,12 +14,12 @@ import java.util.List;
 @Entity
 @Table(name="uoc_question")
 @NamedQuery(name="UocQuestion.findAll", query="SELECT u FROM UocQuestion u")
-public class UocQuestion implements Serializable {
+public class UocQuestion implements Serializable , IDBEntity{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int iduocquestion;
+	private long iduocquestion;
 
 	//bi-directional many-to-one association to SurveryAnswer
 	@OneToMany(mappedBy="uocQuestion", fetch=FetchType.EAGER)
@@ -36,11 +38,11 @@ public class UocQuestion implements Serializable {
 	public UocQuestion() {
 	}
 
-	public int getIduocquestion() {
+	public long getIduocquestion() {
 		return this.iduocquestion;
 	}
 
-	public void setIduocquestion(int iduocquestion) {
+	public void setIduocquestion(long iduocquestion) {
 		this.iduocquestion = iduocquestion;
 	}
 
@@ -80,6 +82,12 @@ public class UocQuestion implements Serializable {
 
 	public void setUoc(Uoc uoc) {
 		this.uoc = uoc;
+	}
+
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return iduocquestion;
 	}
 
 }

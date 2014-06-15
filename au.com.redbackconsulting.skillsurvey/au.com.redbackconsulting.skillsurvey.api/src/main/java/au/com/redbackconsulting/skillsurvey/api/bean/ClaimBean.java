@@ -1,5 +1,7 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.Claim;
+
 import com.google.gson.annotations.Expose;
 
 public class ClaimBean {
@@ -24,6 +26,13 @@ public class ClaimBean {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public static ClaimBean get(Claim entity) {
+		Claim bean = new Claim();
+		bean.setCode(entity.getCode());
+		bean.setIdclaim(entity.getIdclaim());
+		return null;
 	}
 	
 	

@@ -1,12 +1,27 @@
 package au.com.redbackconsulting.skillsurvey.api.bean;
 
+import au.com.redbackconsulting.skillsurvey.persistence.model.ClaimAssignments;
+
 import com.google.gson.annotations.Expose;
 
 public class ClaimAssignmentsBean {
 	
+
+	@Expose
+	private Long id;
 	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Expose
 	private Long claimId;
+	
 	
 	
 	@Expose
@@ -26,6 +41,15 @@ public class ClaimAssignmentsBean {
 
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
+	}
+
+	public static ClaimAssignmentsBean get(ClaimAssignments entity) {
+		ClaimAssignmentsBean bean = new ClaimAssignmentsBean();
+		
+		bean.setClaimId(entity.getClaimid());
+		bean.setRoleId(Long.valueOf(entity.getRoleId()));
+		bean.setId(entity.getId());
+		return null;
 	}
 	
 	
