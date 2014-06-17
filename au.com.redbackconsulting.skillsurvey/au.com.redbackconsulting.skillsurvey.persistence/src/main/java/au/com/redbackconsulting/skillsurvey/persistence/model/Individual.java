@@ -18,7 +18,7 @@ public class Individual implements Serializable,IDBEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idindividual;
+	private long idindividual;
 
 	private String gender;
 
@@ -76,11 +76,11 @@ public class Individual implements Serializable,IDBEntity {
 	public Individual() {
 	}
 
-	public int getIdindividual() {
+	public long getIdindividual() {
 		return this.idindividual;
 	}
 
-	public void setIdindividual(int idindividual) {
+	public void setIdindividual(long idindividual) {
 		this.idindividual = idindividual;
 	}
 

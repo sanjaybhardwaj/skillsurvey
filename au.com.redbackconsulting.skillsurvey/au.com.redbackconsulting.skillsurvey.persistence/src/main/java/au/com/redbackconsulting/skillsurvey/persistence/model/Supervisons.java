@@ -26,25 +26,25 @@ public class Supervisons implements Serializable,IDBEntity {
 
 	@Id
 	@Column(name="SUPERVISORID")
-private Long supervisorId;
+private long supervisorId;
 	
 	
 	@Basic
 	@Column(name="SUPERVISEDID")
-	private Long supervisedId;
+	private long supervisedId;
 
 
-	public Long getSupervisorId() {
+	public long getSupervisorId() {
 		return supervisorId;
 	}
 
 
-	public void setSupervisorId(Long supervisorId) {
+	public void setSupervisorId(long supervisorId) {
 		this.supervisorId = supervisorId;
 	}
 
 
-	public Long getSupervisedId() {
+	public long getSupervisedId() {
 		return supervisedId;
 	}
 

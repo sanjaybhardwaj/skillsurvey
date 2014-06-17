@@ -28,7 +28,7 @@ public class Function implements Serializable, IDBEntity {
 	@OneToMany(mappedBy="function", fetch=FetchType.EAGER)
 	private List<Individual> individuals;
 
-	//bi-directional many-to-many association to Occupation
+//bi-directional many-to-many association to Occupation
 	@ManyToMany(mappedBy="functions", fetch=FetchType.EAGER)
 	private List<Occupation> occupations;
 
@@ -39,8 +39,8 @@ public class Function implements Serializable, IDBEntity {
 		return this.idfunction;
 	}
 
-	public void setIdfunction(int idfunction) {
-		this.idfunction = idfunction;
+	public void setIdfunction(long idfunction) {
+this.idfunction = idfunction;
 	}
 
 	public String getDescription() {

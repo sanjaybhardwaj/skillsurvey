@@ -17,7 +17,7 @@ public class Uoc implements Serializable,IDBEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	private long iduoc;
 
 	private String description;

@@ -2,9 +2,11 @@ package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
-
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -22,11 +24,7 @@ public class Claim implements Serializable, IDBEntity {
 
 	private String code;
 
-//	//bi-directional many-to-many association to Role
-	@ManyToMany(mappedBy="claims", fetch=FetchType.EAGER)
-	private List<Role> roles;
-
-	public Claim() {
+public Claim() {
 	}
 
 	public long getIdclaim() {
@@ -49,14 +47,6 @@ public class Claim implements Serializable, IDBEntity {
 	public Long getId() {
 		// TODO Auto-generated method stub
 		return idclaim;
-	}
-
-	public List<Role> getRoles() {
-		return this.roles;
-	}
-//
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
 	}
 
 }

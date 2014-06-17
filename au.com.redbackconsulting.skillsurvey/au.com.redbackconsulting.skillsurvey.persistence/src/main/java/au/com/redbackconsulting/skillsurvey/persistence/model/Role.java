@@ -2,9 +2,12 @@ package au.com.redbackconsulting.skillsurvey.persistence.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
-
-import java.util.List;
+import javax.persistence.Access;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -13,31 +16,20 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+
 public class Role implements Serializable, IDBEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private long idrole;
 
 	private String description;
 
 	private String name;
 
-//	//bi-directional many-to-many association to Claim
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="claima_assignment"
-		, joinColumns={
-			@JoinColumn(name="role_id")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="claim_id")
-			}
-		)
-	private List<Claim> claims;
-
-	public Role() {
+public Role() {
 	}
 
 	public long getIdrole() {
@@ -68,14 +60,6 @@ public class Role implements Serializable, IDBEntity {
 	public Long getId() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public List<Claim> getClaims() {
-		return this.claims;
-	}
-//
-	public void setClaims(List<Claim> claims) {
-		this.claims = claims;
 	}
 
 }

@@ -15,7 +15,7 @@ sap.ui.controller("skillsurvey-ui.app", {
 		sap.ui.getCore().setModel(oModel,"menuModel");
 
 		this.app = view.app;
-
+	
      	var bus = sap.ui.getCore().getEventBus();
 		bus.subscribe("nav","to", this.navToHandler, this);
 		bus.subscribe("nav","toEdit", this.navToEditHandler, this);
