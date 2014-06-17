@@ -1,5 +1,4 @@
 
-
 sap.ui.controller("skillsurvey-ui.app", {
 
 /**
